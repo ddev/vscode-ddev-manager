@@ -1,0 +1,662 @@
+{
+  "name": "ddev-manager",
+  "displayName": "DDEV Manager",
+  "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
+  "version": "1.0.0",
+  "publisher": "biati",
+  "preview": true,
+  "author": {
+    "name": "Biati Digital",
+    "url": "https://www.biati.com.mx"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "ddev",
+    "development",
+    "local",
+    "docker",
+    "colima",
+    "manager",
+    "explorer",
+    "deploy"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#EFF1F3",
+    "theme": "light"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biati-digital/vscode-ddev-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/biati-digital/vscode-ddev-manager/issues"
+  },
+  "license": "Apache-2.0",
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "biatiddev",
+        "contents": "Connecting to DDEV...\nTo learn more about how to use DDEV [read the docs](https://ddev.readthedocs.io).",
+        "when": "ddev:isConnecting && !ddev:isRunning"
+      },
+      {
+        "view": "biatiddev",
+        "contents": "DDEV not found. DDEV must be installed to use this extension.\n[Install DDEV](command:biatiddev.docsInstall)\nTo learn more about how to use DDEV [read the docs](https://ddev.readthedocs.io).",
+        "when": "ddev:notFound"
+      },
+      {
+        "view": "biatiddev",
+        "contents": "Could not connect to a docker provider. Start or install a docker provider.\n[Start Docker Provider](command:biatiddev.startDockerProvider)\nTo learn more about how to use DDEV [read the docs](https://ddev.readthedocs.io).",
+        "when": "!ddev:isConnecting && ddev:dockerNotRunning"
+      },
+      {
+        "view": "biatiddev",
+        "contents": "DDEV is ready and running. Start by adding your first project.\n[Add Project](command:biatiddev.addProject)\nTo learn more about how to use DDEV [read the docs](https://ddev.readthedocs.io).",
+        "when": "ddev:isRunningEmpty"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "biatiddev",
+          "title": "DDEV Manager",
+          "icon": "assets/ddev-logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "biatiddev": [
+        {
+          "id": "biatiddev",
+          "icon": "assets/ddev-logo.svg",
+          "name": ""
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "icon": "$(more)",
+        "label": "Project Options",
+        "id": "project_submenu"
+      }
+    ],
+    "commands": [
+      {
+        "command": "biatiddev.start",
+        "title": "Start",
+        "category": "DDEV",
+        "icon": "$(debug-start)",
+        "icon_": {
+          "dark": "assets/play.svg",
+          "light": "assets/play.svg"
+        }
+      },
+      {
+        "command": "biatiddev.stop",
+        "title": "Stop",
+        "category": "DDEV",
+        "icon": "$(debug-stop)",
+        "icon_": {
+          "dark": "assets/stop.svg",
+          "light": "assets/stop.svg"
+        }
+      },
+      {
+        "command": "biatiddev.stopOthers",
+        "title": "Stop Others",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.restart",
+        "title": "Restart",
+        "category": "DDEV",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "biatiddev.poweroff",
+        "title": "Power Off",
+        "category": "DDEV",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "biatiddev.delete",
+        "title": "Delete Project",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.addProject",
+        "title": "Add New Project",
+        "category": "DDEV",
+        "icon": "$(plus)"
+      },
+      {
+        "command": "biatiddev.launchInBrowser",
+        "title": "Open Project in Browser",
+        "category": "DDEV",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "biatiddev.launchMailhog",
+        "title": "Open Mailhog",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.launchPHPMyAdmin",
+        "title": "Open phpMyAdmin",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.launchDBManager",
+        "title": "Open Database Administration",
+        "category": "DDEV",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "biatiddev.openConfigFile",
+        "title": "Configure",
+        "category": "DDEV",
+        "icon": "$(pencil)"
+      },
+      {
+        "command": "biatiddev.rename",
+        "title": "Rename",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.openProjectInEditor",
+        "title": "Open Project in Editor",
+        "category": "DDEV",
+        "icon": "$(empty-window)"
+      },
+      {
+        "command": "biatiddev.revealInOS",
+        "title": "Reveal Project Folder",
+        "category": "DDEV",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "biatiddev.createSnapshot",
+        "title": "Create Snapshot",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.restoreSnapshot",
+        "title": "Restore Snapshot",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.clearSnapshots",
+        "title": "Clear All Snapshot",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.importDatabase",
+        "title": "Import Database",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.exportDatabase",
+        "title": "Export Database",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.editService",
+        "icon": "$(pencil)",
+        "title": "Change Service",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.editPHPVersion",
+        "title": "Change PHP Version",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.editNodeJSVersion",
+        "title": "Change NodeJS Version",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.sshTerminal",
+        "title": "Start SSH session",
+        "category": "DDEV",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "biatiddev.databaseTerminal",
+        "title": "Start Database SSH session",
+        "category": "DDEV",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "biatiddev.share",
+        "title": "Share",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.shareStop",
+        "title": "Stop Share",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.xdebugEnable",
+        "title": "XDebug Enable",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.xdebugDisable",
+        "title": "XDebug Disable",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.showDDEVOutputChannel",
+        "title": "Show process information",
+        "icon": "$(info)"
+      },
+      {
+        "command": "biatiddev.showTreeLoader",
+        "title": "Loading",
+        "icon": "$(loading~spin)"
+      },
+      {
+        "command": "biatiddev.treeChangeToAllListView",
+        "title": "Toggle between all projects and workspace project",
+        "icon": "$(folder-active)"
+      },
+      {
+        "command": "biatiddev.treeChangeToWorkspaceListView",
+        "title": "Toggle between all projects and workspace project",
+        "icon": "$(list-selection)"
+      },
+      {
+        "command": "biatiddev.treeReloadList",
+        "title": "Reload List",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "biatiddev.contextConfigureServices",
+        "title": "Configure Services",
+        "icon": "$(more)"
+      },
+      {
+        "command": "biatiddev.addService",
+        "title": "Add Services"
+      },
+      {
+        "command": "biatiddev.deleteService",
+        "title": "Delete Services"
+      },
+      {
+        "command": "biatiddev.launch",
+        "title": "Open in Browser",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "biatiddev.openInBrowser",
+        "title": "Open in Browser"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "biatiddev.treeChangeToAllListView",
+          "when": "view == biatiddev && biatiddev.treeListShows == workspace",
+          "group": "navigation@1"
+        },
+        {
+          "command": "biatiddev.treeChangeToWorkspaceListView",
+          "when": "view == biatiddev && biatiddev.treeListShows == all",
+          "group": "navigation@1"
+        },
+        {
+          "command": "biatiddev.addProject",
+          "when": "view == biatiddev && ddev:isRunning",
+          "group": "navigation@1"
+        },
+        {
+          "command": "biatiddev.treeReloadList",
+          "when": "view == biatiddev && !ddev:poweringOff",
+          "group": "navigation@2"
+        },
+        {
+          "command": "biatiddev.poweroff",
+          "when": "view == biatiddev && ddev:isRunning",
+          "group": "navigation@3"
+        },
+        {
+          "command": "biatiddev.showTreeLoader",
+          "when": "view == biatiddev && ddev:poweringOff",
+          "group": "navigation@4"
+        },
+        {
+          "command": "biatiddev.showDDEVOutputChannel",
+          "when": "view == biatiddev && ddev:poweringOff",
+          "group": "navigation@5"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "biatiddev.showDDEVOutputChannel",
+          "when": "view == biatiddev && viewItem == ddev_loading || viewItem == ddev_doing_action || viewItem == ddev_starting || viewItem == ddev_restarting || viewItem == ddev_stopping || viewItem == ddev_deleting || viewItem =~ /loading$/",
+          "group": "inline"
+        },
+        {
+          "command": "biatiddev.start",
+          "when": "view == biatiddev && viewItem == ddev_inactive",
+          "group": "inline"
+        },
+        {
+          "command": "biatiddev.launchInBrowser",
+          "when": "view == biatiddev && viewItem == ddev_active",
+          "group": "inline@1"
+        },
+        {
+          "command": "biatiddev.sshTerminal",
+          "when": "view == biatiddev && viewItem == ddev_active",
+          "group": "inline@2"
+        },
+        {
+          "command": "biatiddev.restart",
+          "when": "view == biatiddev && viewItem == ddev_active",
+          "group": "inline@3"
+        },
+        {
+          "command": "biatiddev.stop",
+          "when": "view == biatiddev && viewItem == ddev_active",
+          "group": "inline@4"
+        },
+        {
+          "submenu": "project_submenu",
+          "when": "view == biatiddev && (viewItem == ddev_active || viewItem == ddev_inactive)",
+          "group": "inline@5"
+        },
+        {
+          "command": "biatiddev.editService",
+          "when": "view == biatiddev && viewItem == ddev_edit_service",
+          "group": "inline@3"
+        },
+        {
+          "command": "biatiddev.launch",
+          "when": "view == biatiddev && viewItem == ddev_url || viewItem == ddev_launch",
+          "group": "inline@2"
+        },
+        {
+          "command": "biatiddev.revealInOS",
+          "when": "view == biatiddev && viewItem == ddev_path",
+          "group": "inline@2"
+        },
+        {
+          "command": "biatiddev.openProjectInEditor",
+          "when": "view == biatiddev && viewItem == ddev_path",
+          "group": "inline@2"
+        },
+        {
+          "command": "biatiddev.databaseTerminal",
+          "when": "view == biatiddev && viewItem == ddev_mysql || viewItem == ddev_mariadb || viewItem == ddev_postgre",
+          "group": "inline@1"
+        },
+        {
+          "command": "biatiddev.launchDBManager",
+          "when": "view == biatiddev && viewItem == ddev_mysql || viewItem == ddev_mariadb || viewItem == ddev_postgre",
+          "group": "inline@2"
+        }
+      ],
+      "project_submenu": [
+        {
+          "command": "biatiddev.start",
+          "when": "view == biatiddev && viewItem == ddev_inactive",
+          "group": "biatiddev_ga@1"
+        },
+        {
+          "command": "biatiddev.stop",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_ga@1"
+        },
+        {
+          "command": "biatiddev.stopOthers",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_ga@2"
+        },
+        {
+          "command": "biatiddev.restart",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_ga@3"
+        },
+        {
+          "command": "biatiddev.createSnapshot",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gb@1"
+        },
+        {
+          "command": "biatiddev.restoreSnapshot",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gb@2"
+        },
+        {
+          "command": "biatiddev.clearSnapshots",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gb@3"
+        },
+        {
+          "command": "biatiddev.importDatabase",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gb@4"
+        },
+        {
+          "command": "biatiddev.exportDatabase",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gb@5"
+        },
+        {
+          "command": "biatiddev.addService",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gc@1"
+        },
+        {
+          "command": "biatiddev.deleteService",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gc@2"
+        },
+        {
+          "command": "biatiddev.xdebugEnable",
+          "when": "viewItem == ddev_active && !ddev:xdebugEnabled",
+          "group": "biatiddev_gd@4"
+        },
+        {
+          "command": "biatiddev.xdebugDisable",
+          "when": "viewItem == ddev_active && ddev:xdebugEnabled",
+          "group": "biatiddev_gd@5"
+        },
+        {
+          "command": "biatiddev.share",
+          "when": "viewItem == ddev_active && !ddev:sharing",
+          "group": "biatiddev_ge@6"
+        },
+        {
+          "command": "biatiddev.shareStop",
+          "when": "viewItem == ddev_active && ddev:sharing",
+          "group": "biatiddev_ge@6"
+        },
+        {
+          "command": "biatiddev.rename",
+          "when": "view == biatiddev",
+          "group": "biatiddev_gf@1"
+        },
+        {
+          "command": "biatiddev.openConfigFile",
+          "when": "view == biatiddev",
+          "group": "biatiddev_gf@2"
+        },
+        {
+          "command": "biatiddev.delete",
+          "group": "biatiddev_gf@100"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "biatiddev.showTreeLoader",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.treeReloadList",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.treeChangeToAllListView",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.treeChangeToWorkspaceListView",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.showDDEVOutputChannel",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.contextConfigureServices",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.editService",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.launch",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DDEV Manager",
+      "properties": {
+        "ddevManager.automaticallyConfigureWorkspacePHP": {
+          "order": 1,
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, the extension will get the PHP version configured on your DDEV project and will configure the workspace to use the same version so you can get appropriate suggestions and diagnostics. You need to install a PHP intellisen extension in order for this to work, currently it supports the following extensions: PHP Intelephense and PHP by Devsense"
+        },
+        "ddevManager.defaultDatabaseManager": {
+          "order": 1,
+          "type": "string",
+          "default": "Not configured",
+          "enum": [
+            "Not configured",
+            "TablePlus",
+            "Sequel Ace",
+            "Querious",
+            "Sequel Pro",
+            "phpMyAdmin",
+            "Adminer",
+            "VS Code Database Client extension"
+          ],
+          "description": "Select the database manager you want to use",
+          "enumDescriptions": [
+            "Select a valid option to be able to open the database directly with DDEV Manager",
+            "Requires TablePlus app. Available for Mac and Windows",
+            "Requires Sequel Ace app. Available for Mac Only",
+            "Requires Querious app. Available for Mac Only",
+            "Requires Sequel Pro. Available for Mac Only",
+            "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
+            "Requires Adminer service. If the service is still not installed the extension will give you the option to install it",
+            "Requires the Paid version of Database Client vscode extension, the paid version is necessary to be able to save connections in the workspace"
+          ]
+        },
+        "ddevManager.showProjectsList": {
+          "order": 2,
+          "type": "string",
+          "default": "All Projects",
+          "enum": [
+            "All Projects",
+            "Current Workspace"
+          ],
+          "enumDescriptions": [
+            "Display all DDEV Projects",
+            "Display only the DDEV project for the current workspace, if not found the full list will be displayed"
+          ]
+        },
+        "ddevManager.showServicesExpandedInSidebar": {
+          "order": 3,
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
+        },
+        "ddevManager.showSuccessNotifications": {
+          "order": 4,
+          "type": "boolean",
+          "default": true,
+          "description": "Show a notification after calling commands using the command palette and everything worked correctly (only for some commands like start, stop, restart or power off). You will always get notifications if the command failed."
+        },
+        "ddevManager.showStatusBarProcessIndicator": {
+          "order": 5,
+          "type": "boolean",
+          "default": true,
+          "description": "Show a spinning indicator when calling commands using the command palette to indicate that the command is being executed, if clicked it will display the command output so you can see what DDEV is returning in real time."
+        },
+        "ddevManager.omitSnapshotOnProjectDelete": {
+          "order": 6,
+          "type": "boolean",
+          "default": false,
+          "description": "When deleteing a project, by default DDEV creates a snapshot of the database, if this option is enabled, snapshots will not be created when a project is deleted"
+        }
+      }
+    },
+    "terminal": {
+      "profiles": [
+        {
+          "icon": "$(code)",
+          "id": "biatiddev.sshterminal",
+          "title": "DDEV SSH"
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.5.0",
+    "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "@vscode/test-electron": "^2.1.5",
+    "eslint": "^8.20.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.0.0",
+    "ts-loader": "^9.3.1",
+    "typescript": "^5.1.6",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^1.2.1",
+    "rxjs": "^7.8.0",
+    "yaml": "^2.2.1"
+  }
+}
