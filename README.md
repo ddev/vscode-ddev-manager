@@ -6,9 +6,15 @@ This extension simplifies the management of all your [DDEV](https://ddev.readthe
 
 ### View all your DDEV projects from the sidebar
 
-The sidebar provides an overview of all your projects, offering a user-friendly interface for customizing each project with ease. If your active workspace includes or is part of a DDEV project, you can use the command palette to perform any of the DDEV commands, this commands will only apply to the active workspace project.
+The sidebar provides an overview of all your projects, offering a user-friendly interface for customizing each project with ease. If your active workspace includes or is part of a DDEV project, you can use the command palette.
 
 ![DDEV Sidebar](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-start.png "DDEV Sidebar")
+
+### Control your workspace project from the command palette
+
+In addition to the sidebar, you can use the command palette to manage the current DDEV project open in VSCode. All commands executed through the command palette are specifically targeted at the project found in the workspace. There are cases when you only open a subfolder of a DDEV project with VSCode, the extension is smart enough to automatically detect that the opened folder is part of a DDEV project and get all the correct project data.
+
+![Command Palette](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-palette.png "Command Palette")
 
 ### Manage your projects services
 
@@ -47,13 +53,17 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Change sidebar view to list all projects or only the project for the active workspace
 - And much more...
 
+## Extension Settings
+
+The extension comes with multiple options, to see all the available options go to **VSCode Settings -> Extensions -> DDEV Manager**
+
 ## Roadmap
 
 - Create/Edit projects visually (maybe)
 - When creating a project automatically download the CMS files and make a full installation
 - Execute Custom DDEV Commands
 - Notify DDEV updates and maybe self upgrade
-- Auto start a docker provider if it's not running
+- Auto start docker provider if it's not running
 
 ## Know issues
 
