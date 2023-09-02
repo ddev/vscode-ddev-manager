@@ -22,6 +22,10 @@ You can **add and delete** services directly from VSCode, you will see a list of
 
 ![DDEV Services](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-services.png "DDEV Services")
 
+You can easily customize your PHP and NodeJS versions. When editing the service, you'll see all the available versions to choose from. The extension will take care of the rest.
+
+![DDEV Services](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-service-version.png "DDEV Services")
+
 ### SSH Access to your projects
 
 You can launch an SSH terminal for any of your running projects. Within the sidebar, each project has a button to create a new terminal in the current VSCode window, so no matter if you are working on project **A** you can SSH access project **B** in the same window with a single click. If your active workspace includes or is part of a DDEV project you can use the command palette to **Start SSH session** or you'll also have the option to create a new DDEV terminal from the terminals panel.
