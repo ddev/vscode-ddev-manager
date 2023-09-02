@@ -4,8 +4,9 @@ about: Create a report to help us improve
 title: "[BUG]"
 labels: ''
 assignees: ''
-
 ---
+
+Please make sure that the bug only applies to this extension, if you have a problem with ddev itself you should open an issue in the ddev repo and not here.
 
 **Describe the bug**
 A clear and concise description of what the bug is.
