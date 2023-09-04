@@ -63,11 +63,7 @@ The extension comes with multiple options, to see all the available options go t
 
 ## Roadmap
 
-- Create/Edit projects visually (maybe)
-- When creating a project automatically download the CMS files and make a full installation
-- Execute Custom DDEV Commands
-- Notify DDEV updates and maybe self upgrade
-- Auto start docker provider if it's not running
+You can see the roadmap and progress [here](https://github.com/users/biati-digital/projects/1/views/1)
 
 ## Know issues
 
