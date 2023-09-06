@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "publisher": "biati",
   "preview": true,
   "author": {
@@ -147,8 +147,8 @@
         "icon": "$(globe)"
       },
       {
-        "command": "biatiddev.launchMailhog",
-        "title": "Open Mailhog",
+        "command": "biatiddev.launchMail",
+        "title": "Open Mail",
         "category": "DDEV"
       },
       {
@@ -608,6 +608,12 @@
           "type": "boolean",
           "default": false,
           "description": "When deleteing a project, by default DDEV creates a snapshot of the database, if this option is enabled, snapshots will not be created when a project is deleted"
+        },
+        "ddevManager.deleteDDEVFolder": {
+          "order": 7,
+          "type": "boolean",
+          "default": false,
+          "description": "When deleteing a project, by default DDEV does not delete the .ddev folder within the project, if this option is enabled, the .ddev folder will be removed when you delete a project. Your project files are not deleted when you delete a project."
         }
       }
     },
@@ -646,17 +652,22 @@
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "@vscode/test-electron": "^2.1.5",
+    "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.20.0",
     "glob": "^10.3.3",
     "mocha": "^10.0.0",
     "ts-loader": "^9.3.1",
     "typescript": "^5.1.6",
     "webpack": "^5.74.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0",
+    "webpack-shell-plugin-next": "^2.3.1"
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.2.1",
+    "croner": "^7.0.1",
     "rxjs": "^7.8.0",
+    "ws": "^8.13.0",
     "yaml": "^2.2.1"
   }
 }
