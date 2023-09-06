@@ -1,8 +1,10 @@
-//@ts-check
-
 'use strict';
 
 const path = require('path');
+const fs = require("fs");
+const WebpackShellPluginNext = require("webpack-shell-plugin-next");
+const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require("copy-webpack-plugin");
 
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
@@ -47,13 +49,19 @@ const extensionConfig = {
     filename: 'extension.js',
     libraryTarget: 'commonjs2'
   },
-  externals: {
-    // 'pty': 'node-pty',
-    // 'node-pty': path.resolve(__dirname, "../node-pty"),
-    // 'node-pty': 'commonjs ' + path.resolve("/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/node_modules.asar/node-pty"),
-    vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
-    // modules added here also need to be added in the .vscodeignore file
-  },
+  externals: [
+    //nodeExternals(),
+    {
+      "vscode": "commonjs vscode"
+    }
+  ],
+  // externals: {
+  //   //   // 'pty': 'node-pty',
+  //   //   // 'node-pty': path.resolve(__dirname, "../node-pty"),
+  //   //   // 'node-pty': 'commonjs ' + path.resolve("/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/node_modules.asar/node-pty"),
+  //   vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
+  //   //   // modules added here also need to be added in the .vscodeignore file
+  // },
   resolve: {
     // support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
     extensions: ['.ts', '.js']
@@ -75,6 +83,20 @@ const extensionConfig = {
   infrastructureLogging: {
     level: "log", // enables logging required for problem matchers
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src', 'websocket', 'server.js'),
+          to: "websocket/"
+        },
+        {
+          from: path.resolve(__dirname, 'includes'),
+          to: path.resolve(__dirname, 'dist', 'includes'),
+        }
+      ],
+    })
+  ],
 };
 
 
@@ -92,4 +114,6 @@ const webviewConfig = {
     chunkFormat: "module",
   },
 };
+
+// module.exports = [extensionConfig, webviewConfig, serverConfig];
 module.exports = [extensionConfig, webviewConfig];
