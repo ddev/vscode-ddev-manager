@@ -16,15 +16,21 @@ In addition to the sidebar, you can use the command palette to manage the curren
 
 ![Command Palette](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-palette.png "Command Palette")
 
+### Change PHP/NodeJS and Server Type
+
+You can easily customize the PHP and NodeJS version used in your project. You'll see a list of all the available versions to choose from. The extension will take care of the rest.
+
+![DDEV Processes](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-service-version.png "DDEV Processes")
+
 ### Manage your projects services
 
 You can **add and delete** services directly from VSCode, you will see a list of the available services to install or a list of the installed services, depending on your chosen action, so you can easily choose the services to add or remove.
 
 ![DDEV Services](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-services.png "DDEV Services")
 
-You can easily customize your PHP and NodeJS versions. When editing the service, you'll see all the available versions to choose from. The extension will take care of the rest.
+Installed services will based on their service type, If a service exposes a URL, you can easily launch it with a single click.
 
-![DDEV Services](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-service-version.png "DDEV Services")
+![DDEV Services Actions](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-service-actions.png "DDEV Services Actions")
 
 ### SSH Access to your projects
 
