@@ -625,7 +625,34 @@
           "title": "DDEV SSH"
         }
       ]
-    }
+    },
+    "breakpoints": [
+      {
+        "language": "php"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "ddev-php",
+        "label": "DDEV Debug",
+        "configurationSnippets": [
+          {
+            "label": "DDEV Listen for Xdebug",
+            "description": "DDEV configuration for launching Xdebug",
+            "body": {
+              "name": "DDEV Listen for Xdebug",
+              "type": "php",
+              "request": "launch",
+              "hostname": "0.0.0.0",
+              "port": 9003,
+              "pathMappings": {
+                "/var/www/html": "^\"\\${workspaceFolder}\""
+              }
+            }
+          }
+        ]
+      }
+    ]
   },
   "capabilities": {
     "virtualWorkspaces": false,
