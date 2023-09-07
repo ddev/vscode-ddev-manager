@@ -31,7 +31,7 @@ If applicable, add screenshots to help explain your problem.
 - DDEV version: run in terminal ddev --version
 - Docker provider: [e.g. Docker Desktop, Orbstack, Colima, etc]
 - VSCode version:
-- DDEV Manager version:
+- DDEV Manager version: [VSCode extension version; see extension page]
 
 **Additional context**
 Add any other context about the problem here.
