@@ -8,7 +8,7 @@ This extension simplifies the management of all your [DDEV](https://ddev.readthe
 
 The sidebar provides an overview of all your projects, offering a user-friendly interface for customizing each project with ease. If your active workspace includes or is part of a DDEV project, you can use the command palette.
 
-![DDEV Sidebar](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-start.png "DDEV Sidebar")
+![DDEV Sidebar](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-sidebar.png "DDEV Sidebar")
 
 ### Control your workspace project from the command palette
 
