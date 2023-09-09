@@ -2,6 +2,16 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.1.1
+
+- New: Registered configuration snippets for Xdebug. If you open you launch.json and click the "Add configuration" button you'll see DDEV Xdebug snippet
+- New: Added option in sidebar and command palette to quickly change server type
+- Improved: To be consistent with DDEV we renamed "Type" to "Project Type" in the sidebar
+- Improved: Added new red loader that it's displayed when deleting a project
+- Fixed: Incorrect loader displayed when doing action "Stop Others"
+- Fixed: Display correct message in sidebar view when there's only one project and it's deleted
+- Fixed: Command editService when called from the command palette was not updating the sidebar item
+
 ## v1.1.0
 
 - New: When using Share (ddev share) and the project type is WordPress the extension will make the URL's relative only in the shared version of the site. Sharing works without the need to update the url's in the database. The local and the shared version will work at the same time.
