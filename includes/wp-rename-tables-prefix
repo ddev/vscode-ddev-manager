@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+## Author: Biati Digital https://www.biati.digital
+## Description: Rename your database tables prefix
+## Usage: wp-rename-tables-prefix
+## Example: "ddev wp-rename-tables-prefix --from=old_ --to=new_ --silent=false"
+## Flags: [{"Name":"from","Type":"string","Usage":"the prefix to replace, not mandatory"},{"Name":"to","Type":"string","Usage":"the new prefix to use in tables, mandatory"},{"Name":"silent","Type":"bool","Usage":"display the process output"}]
+## ProjectTypes: wordpress
+
+TABLES=$(mysql -udb -pdb db -e "SHOW TABLES;")
+
+if [ -z "$TABLES" ]; then
+    echo "No tables found in your database."
+    exit 0
+fi
+
+for ARGUMENT in "$@"
+do
+   KEY=$(echo $ARGUMENT | cut -f1 -d=)
+   KEY_LENGTH=${#KEY}
+   VALUE="${ARGUMENT:$KEY_LENGTH+1}"
+   [[ $KEY == --* ]] && KEY=${KEY:2}
+   export "$KEY"="$VALUE"
+done
+
+# If $from is not provided, we need to find the old prefix
+# as we already have the tables lets just check their name
+# if [ "$#" -ne 2 ]; then
+if [ -z "$from" ]; then
+    for table in $TABLES; do
+        if [[ "$table" == *"postmeta" ]]; then
+            from=$(echo "$table" | sed "s/postmeta//")
+            break;
+        fi
+    done
+
+    if [ -z "$from" ]; then
+        echo "Unable to find the old prefix, rerun and provide the old and new prefix."
+        exit 0
+    else
+        if [ "$silent" != "true" ]; then
+            echo "Previous table prefix not provided but extracted from database. Setting from to $from"
+        fi
+    fi
+fi
+
+# if we do not have "from" and "to" exit
+if [ -z "$from" ] || [ -z "$to" ]; then
+    echo "Usage: $0 --from=old_prefix --to=new_prefix"
+    exit 0
+fi
+
+# if from and to are the same exit
+if [ "$from" == "$to" ]; then
+    echo "The new prefix is the same as the old prefix. Nothing to do."
+    exit 0
+fi
+
+echo "Renaming tables prefix from $from to $to"
+
+for table in $TABLES; do
+    if [[ "$table" =~ ^"$from" ]]; then
+        new_table=$(echo "$table" | sed "s/$from/$to/")
+        mysql -udb -pdb db -e "RENAME TABLE $table TO $new_table;"
+
+        if [ "$silent" != "true" ]; then
+            echo "Tabla $table renamed to $new_table"
+        fi
+    fi
+done
+
+OPTIONS_PREFIX=$(mysql -udb -pdb db -e "SELECT option_name FROM ${to}options where option_name LIKE '%${from}%';")
+for option in $OPTIONS_PREFIX; do
+    if [[ "$option" =~ ^"$from" ]]; then
+        new_option=$(echo "$option" | sed "s/$from/$to/")
+        mysql -udb -pdb db -e "update ${to}options set option_name='${new_option}' where option_name='${option}';"
+    fi
+done
+
+USERMETA_PREFIX=$(mysql -udb -pdb db -e "SELECT meta_key FROM ${to}usermeta where meta_key LIKE '%${from}%';")
+for meta in $USERMETA_PREFIX; do
+    if [[ "$meta" =~ ^"$from" ]]; then
+        new_meta=$(echo "$meta" | sed "s/$from/$to/")
+        mysql -udb -pdb db -e "update ${to}usermeta set meta_key='${new_meta}' where meta_key='${meta}';"
+    fi
+done
