@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "biati",
   "preview": true,
   "author": {
@@ -213,7 +213,12 @@
       {
         "command": "biatiddev.editService",
         "icon": "$(pencil)",
-        "title": "Change Service",
+        "title": "Edit",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.editServerType",
+        "title": "Change Server Type",
         "category": "DDEV"
       },
       {
