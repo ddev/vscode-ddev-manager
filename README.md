@@ -28,7 +28,7 @@ You can **add and delete** services directly from VSCode, you will see a list of
 
 ![DDEV Services](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-services.png "DDEV Services")
 
-Installed services will based on their service type, If a service exposes a URL, you can easily launch it with a single click.
+Installed services will display different actions based on their service type, If a service exposes a URL, you can easily launch it with a single click.
 
 ![DDEV Services Actions](https://raw.githubusercontent.com/biati-digital/vscode-ddev-manager/main/assets/ddev-service-actions.png "DDEV Services Actions")
 
@@ -56,6 +56,7 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Enable/Disable Share. Share your project outside of your local network
 - Automatically configure the PHP version in the editor. Used for providing version appropriate suggestions and diagnostics. It required a extension like PHP Intelephense or PHP by DEVSENSE
 - Integrated DDEV terminal
+- Configuration Snippets for launch.json to easily configure Xdebug
 - Quickly launch projects in your browser
 - Quickly open the Config.yaml file
 - Poweroff DDEV
