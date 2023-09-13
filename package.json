@@ -608,17 +608,23 @@
           "default": true,
           "description": "Show a spinning indicator when calling commands using the command palette to indicate that the command is being executed, if clicked it will display the command output so you can see what DDEV is returning in real time."
         },
-        "ddevManager.omitSnapshotOnProjectDelete": {
+        "ddevManager.createSnapshotOnProjectStop": {
           "order": 6,
           "type": "boolean",
           "default": false,
-          "description": "When deleteing a project, by default DDEV creates a snapshot of the database, if this option is enabled, snapshots will not be created when a project is deleted"
+          "description": "Automatically create a database snapshot when stopping a project, This serves as a precautionary measure in the event that your containers become corrupted or destroyed. Snapshots are stored inside the .ddev folder"
         },
-        "ddevManager.deleteDDEVFolder": {
+        "ddevManager.omitSnapshotOnProjectDelete": {
           "order": 7,
           "type": "boolean",
           "default": false,
-          "description": "When deleteing a project, by default DDEV does not delete the .ddev folder within the project, if this option is enabled, the .ddev folder will be removed when you delete a project. Your project files are not deleted when you delete a project."
+          "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created when a project is deleted"
+        },
+        "ddevManager.deleteDDEVFolder": {
+          "order": 8,
+          "type": "boolean",
+          "default": false,
+          "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
         }
       }
     },
@@ -698,6 +704,7 @@
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.2.1",
     "croner": "^7.0.1",
+    "lodash-es": "^4.17.21",
     "rxjs": "^7.8.0",
     "ws": "^8.13.0",
     "yaml": "^2.2.1"
