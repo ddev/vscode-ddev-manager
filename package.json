@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "publisher": "biati",
   "preview": true,
   "author": {
@@ -13,7 +13,6 @@
     "vscode": "^1.70.0"
   },
   "categories": [
-    "Testing",
     "Other"
   ],
   "keywords": [
