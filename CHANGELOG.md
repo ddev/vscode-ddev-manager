@@ -2,6 +2,14 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.2.0
+
+- New: Automatically add launch configuration to launch.json when Xdebug is enabled, the file is created if it does not exist
+- New: New option to always create a database snaphot when a project is stopped
+- Changed: Extension category in the marketplace
+- Fixed: Duplicate welcome view in sidebar when docker was not running
+- Fixed: Reload services data when the project is stared. There's no reliable way to get services/add-ons if the project is not running
+
 ## v1.1.1
 
 - New: Registered configuration snippets for Xdebug. If you open you launch.json and click the "Add configuration" button you'll see DDEV Xdebug snippet
