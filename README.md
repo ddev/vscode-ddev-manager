@@ -53,10 +53,11 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Import/Export databases
 - Open the database with any application you want (PHP MyAdmin, TablePlus, Sequel Ace, etc.)
 - Enable/Disable XDebug
+- Automatically configure the debugger to work with Xdebug and DDEV wne you enable Xdebug
+- Launch configuration snippets for launch.json
 - Enable/Disable Share. Share your project outside of your local network
 - Automatically configure the PHP version in the editor. Used for providing version appropriate suggestions and diagnostics. It required a extension like PHP Intelephense or PHP by DEVSENSE
 - Integrated DDEV terminal
-- Configuration Snippets for launch.json to easily configure Xdebug
 - Quickly launch projects in your browser
 - Quickly open the Config.yaml file
 - Poweroff DDEV
