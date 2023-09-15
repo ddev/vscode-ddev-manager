@@ -308,6 +308,10 @@
       {
         "command": "biatiddev.openInBrowser",
         "title": "Open in Browser"
+      },
+      {
+        "command": "biatiddev.deleteAllImages",
+        "title": "Delete Docker images created by DDEV"
       }
     ],
     "menus": {
