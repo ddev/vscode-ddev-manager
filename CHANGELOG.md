@@ -2,6 +2,18 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.3.0
+
+- New: Sync state between multiple VSCode editor windows
+- New: Check for DDEV changes outside the editor
+- New: Added new command to delete all images to free up disk space used by previous docker image versions
+- New: Added support for PHP 8.3
+- New: Added command to edit php.ini file
+- New: Added command to edit nginx.conf file
+- New: Check for DDEV updates and notify the user, with information about how to update
+- New: The extension can detect if a file inside .ddev is updated and display a message allowing the user to restart to apply the new changes. Only if the file is edited with VS Code and the project is running.
+- Improved: Added skip-confirmation to some commands to avoid confirmation messages from DDEV
+
 ## v1.2.0
 
 - New: Automatically add launch configuration to launch.json when Xdebug is enabled, the file is created if it does not exist
