@@ -2,9 +2,8 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "publisher": "biati",
-  "preview": true,
   "author": {
     "name": "Biati Digital",
     "url": "https://www.biati.com.mx"
@@ -212,7 +211,7 @@
       {
         "command": "biatiddev.editService",
         "icon": "$(pencil)",
-        "title": "Edit",
+        "title": "Change Version",
         "category": "DDEV"
       },
       {
@@ -223,6 +222,18 @@
       {
         "command": "biatiddev.editPHPVersion",
         "title": "Change PHP Version",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.editNginxConfFull",
+        "title": "Edit nginx.conf file",
+        "icon": "$(go-to-file)",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.editPHPINI",
+        "title": "Edit php.ini file",
+        "icon": "$(go-to-file)",
         "category": "DDEV"
       },
       {
@@ -265,53 +276,64 @@
       {
         "command": "biatiddev.showDDEVOutputChannel",
         "title": "Show process information",
-        "icon": "$(info)"
+        "icon": "$(info)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.showTreeLoader",
         "title": "Loading",
-        "icon": "$(loading~spin)"
+        "icon": "$(loading~spin)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.treeChangeToAllListView",
         "title": "Toggle between all projects and workspace project",
-        "icon": "$(folder-active)"
+        "icon": "$(folder-active)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.treeChangeToWorkspaceListView",
         "title": "Toggle between all projects and workspace project",
-        "icon": "$(list-selection)"
+        "icon": "$(list-selection)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.treeReloadList",
         "title": "Reload List",
-        "icon": "$(refresh)"
+        "icon": "$(refresh)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.contextConfigureServices",
         "title": "Configure Services",
-        "icon": "$(more)"
+        "icon": "$(more)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.addService",
-        "title": "Add Services"
+        "title": "Add Services",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.deleteService",
-        "title": "Delete Services"
+        "title": "Delete Services",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.launch",
         "title": "Open in Browser",
-        "icon": "$(link-external)"
+        "icon": "$(link-external)",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.openInBrowser",
-        "title": "Open in Browser"
+        "title": "Open in Browser",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.deleteAllImages",
-        "title": "Delete Docker images created by DDEV"
+        "title": "Delete Docker images created by DDEV",
+        "category": "DDEV"
       }
     ],
     "menus": {
@@ -390,8 +412,8 @@
         },
         {
           "command": "biatiddev.editService",
-          "when": "view == biatiddev && viewItem == ddev_edit_service",
-          "group": "inline@3"
+          "when": "view == biatiddev && viewItem =~ /^ddev_edit_service/",
+          "group": "inline@4"
         },
         {
           "command": "biatiddev.launch",
@@ -706,8 +728,10 @@
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.2.1",
+    "compare-versions": "^6.1.0",
     "croner": "^7.0.1",
     "lodash-es": "^4.17.21",
+    "node-fetch": "^3.3.2",
     "rxjs": "^7.8.0",
     "ws": "^8.13.0",
     "yaml": "^2.2.1"
