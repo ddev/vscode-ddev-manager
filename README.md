@@ -46,14 +46,16 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Use the command palette to run commands on the workspace you are working on
 - Start/Stop/Restart/Rename/Delete projects
 - Stop all projects except the selected one
-- Change Services versions (PHP, NodeJS, etc.)
+- Change Services versions (PHP, NodeJS, Server, etc.)
 - Install/Uninstall Services
 - Launch Installed Services (Adminer, Mailhog, phpMyAdmin, etc.)
 - Create/Restore/Clear Snapshots
 - Import/Export databases
+- Option to automatically create a database snapshot when you stop a project
 - Open the database with any application you want (PHP MyAdmin, TablePlus, Sequel Ace, etc.)
+- Easily edit php.ini, nginx.conf, apache.conf and other files
 - Enable/Disable XDebug
-- Automatically configure the debugger to work with Xdebug and DDEV wne you enable Xdebug
+- Automatically configure the debugger to work with Xdebug and DDEV when you enable Xdebug
 - Launch configuration snippets for launch.json
 - Enable/Disable Share. Share your project outside of your local network
 - Automatically configure the PHP version in the editor. Used for providing version appropriate suggestions and diagnostics. It required a extension like PHP Intelephense or PHP by DEVSENSE
@@ -63,6 +65,9 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Poweroff DDEV
 - Reveal DDEV projects in your OS file explorer
 - Change sidebar view to list all projects or only the project for the active workspace
+- Sync state with DDEV and other VS Code windows
+- Check for DDEV updates and instructions to know how to update
+- Clean all DDEV docker images to free up disk space
 - And much more...
 
 ## Extension Settings
