@@ -2,6 +2,10 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.3.1
+
+- Fixed: Stop project command
+
 ## v1.3.0
 
 - New: Sync state between multiple VSCode editor windows
