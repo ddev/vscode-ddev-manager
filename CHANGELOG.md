@@ -2,6 +2,13 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.3.2
+
+- Improved: Checking for updates can be disabled in the extension settings
+- Improved: Creating a project now sets some defaults depending on the project type
+- Improved: Descriptions to be more clear when creating a project
+- Fixed: Fixed error restoring snapshot if the snapshot name contained hyphens
+
 ## v1.3.1
 
 - Fixed: Stop project command
