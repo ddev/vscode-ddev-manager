@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -650,6 +650,12 @@
           "type": "boolean",
           "default": false,
           "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
+        },
+        "ddevManager.checkForUpdates": {
+          "order": 9,
+          "type": "boolean",
+          "default": true,
+          "description": "Check for new versions of DDEV"
         }
       }
     },
