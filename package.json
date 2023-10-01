@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -587,8 +587,7 @@
             "Querious",
             "Sequel Pro",
             "phpMyAdmin",
-            "Adminer",
-            "VS Code Database Client extension"
+            "Adminer"
           ],
           "description": "Select the database manager you want to use",
           "enumDescriptions": [
@@ -598,8 +597,7 @@
             "Requires Querious app. Available for Mac Only",
             "Requires Sequel Pro. Available for Mac Only",
             "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
-            "Requires Adminer service. If the service is still not installed the extension will give you the option to install it",
-            "Requires the Paid version of Database Client vscode extension, the paid version is necessary to be able to save connections in the workspace"
+            "Requires Adminer service. If the service is still not installed the extension will give you the option to install it"
           ]
         },
         "ddevManager.showProjectsList": {
@@ -621,38 +619,44 @@
           "default": true,
           "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
         },
-        "ddevManager.showSuccessNotifications": {
+        "ddevManager.showUnofficialServicesAndAddons": {
           "order": 4,
+          "type": "boolean",
+          "default": false,
+          "description": "By default only official add-ons will listed when installing a new service/add-on, to list unofficial add-ons enable this option. Please note unofficial add-ons may not be necessarily supported or tested and are maintained by the community"
+        },
+        "ddevManager.showSuccessNotifications": {
+          "order": 5,
           "type": "boolean",
           "default": true,
           "description": "Show a notification after calling commands using the command palette and everything worked correctly (only for some commands like start, stop, restart or power off). You will always get notifications if the command failed."
         },
         "ddevManager.showStatusBarProcessIndicator": {
-          "order": 5,
+          "order": 6,
           "type": "boolean",
           "default": true,
           "description": "Show a spinning indicator when calling commands using the command palette to indicate that the command is being executed, if clicked it will display the command output so you can see what DDEV is returning in real time."
         },
         "ddevManager.createSnapshotOnProjectStop": {
-          "order": 6,
+          "order": 7,
           "type": "boolean",
           "default": false,
           "description": "Automatically create a database snapshot when stopping a project, This serves as a precautionary measure in the event that your containers become corrupted or destroyed. Snapshots are stored inside the .ddev folder"
         },
         "ddevManager.omitSnapshotOnProjectDelete": {
-          "order": 7,
+          "order": 8,
           "type": "boolean",
           "default": false,
-          "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created when a project is deleted"
+          "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created."
         },
         "ddevManager.deleteDDEVFolder": {
-          "order": 8,
+          "order": 9,
           "type": "boolean",
           "default": false,
           "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
         },
         "ddevManager.checkForUpdates": {
-          "order": 9,
+          "order": 10,
           "type": "boolean",
           "default": true,
           "description": "Check for new versions of DDEV"
