@@ -34,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/biati-digital/vscode-ddev-manager.git"
+    "url": "https://github.com/ddev/vscode-ddev-manager.git"
   },
   "bugs": {
-    "url": "https://github.com/biati-digital/vscode-ddev-manager/issues"
+    "url": "https://github.com/ddev/vscode-ddev-manager/issues"
   },
   "license": "Apache-2.0",
   "main": "./dist/extension.js",
