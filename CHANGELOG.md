@@ -2,6 +2,11 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.3.3
+
+- The extension repository has been moved to the DDEV org
+- New: Added option to show unofficial services/add-ons
+
 ## v1.3.2
 
 - Improved: Checking for updates can be disabled in the extension settings

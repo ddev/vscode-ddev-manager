@@ -78,15 +78,11 @@ The extension comes with multiple options, to see all the available options go t
 
 You can see the roadmap and progress [here](https://github.com/users/biati-digital/projects/1/views/1)
 
-## Know issues
-
-The extension was developed and tested on macOS with Docker Desktop and Orbstack, i did some tests on Windows 11 using WSL2 and also a traditional installation and the tested commands worked correctly. I've not tested the extension on Linux yet but it should work. This is still under development so make sure to open an iSSUE if you find a bug.
-
-- There's a few things that are still not implemented
-
 ## Requirements
 
 - You'll need a Docker provider on your system before you can install DDEV. [More information](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/)
 - You must have DDEV already installed and working. [Install instructions](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
 
-This project was created by [Biati Digital](https://www.biati.com.mx), if you find it useful please consider adding a review and share it with the world.
+This extension was created and maintained by [Biati Digital](https://www.biati.com.mx), if you find it useful please consider adding a review and share it with the world.
+
+Starting from v1.3.3, the extension is now part of the official DDEV org.
