@@ -2,6 +2,10 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v1.3.4
+
+- Fixed: When adding a new project, if the name was left empty the user still was able to continue. Now the field it's validated and an error message is presented.
+
 ## v1.3.3
 
 - The extension repository has been moved to the DDEV org
