@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -715,6 +715,8 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
+    "vscode:package": "vsce package",
+    "vscode:publish": "vsce publish",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
