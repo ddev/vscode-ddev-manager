@@ -2,6 +2,18 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v.1.4.0
+
+- New: Now the extension is able to start your docker provider if it's not running. Tested with Docker Desktop, OrbStack and Colima
+- New: Option to configure Colima VM in case you are using it as a Docker provider
+- New: Exclude Alpha releases from update notification
+- Fixed: Added skip-confirmation when doing restart command
+
+## v1.3.5
+
+- New: Hovering over the database service in the sidebar will show a tooltip with the host port if the project is running
+- Improved: Exclude the output of `list` command in the output panel as it can saturate the panel
+
 ## v1.3.4
 
 - Fixed: When adding a new project, if the name was left empty the user still was able to continue. Now the field it's validated and an error message is presented.
