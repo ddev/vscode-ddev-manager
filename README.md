@@ -66,8 +66,10 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Reveal DDEV projects in your OS file explorer
 - Change sidebar view to list all projects or only the project for the active workspace
 - Sync state with DDEV and other VS Code windows
+- Start Docker provider if it's not running
 - Check for DDEV updates and instructions to know how to update
 - Clean all DDEV docker images to free up disk space
+- When editing files inside the .dev folder the extension will detect changes and show you different actions depending on the edited file
 - And much more...
 
 ## Extension Settings
