@@ -1,0 +1,104 @@
+diff --git a/node_modules/open/index.js b/node_modules/open/index.js
+index c79501e..626d8bf 100644
+--- a/node_modules/open/index.js
++++ b/node_modules/open/index.js
+@@ -1,20 +1,20 @@
+-import process from 'node:process';
+-import {Buffer} from 'node:buffer';
+-import path from 'node:path';
+-import {fileURLToPath} from 'node:url';
+-import childProcess from 'node:child_process';
+-import fs from 'node:fs/promises';
+-import {constants as fsConstants} from 'node:fs'; // TODO: Move this to the above import when targeting Node.js 18.
+-import isWsl from 'is-wsl';
+-import defineLazyProperty from 'define-lazy-prop';
+ import defaultBrowser from 'default-browser';
++import defineLazyProperty from 'define-lazy-prop';
+ import isInsideContainer from 'is-inside-container';
++import isWsl from 'is-wsl';
++import { Buffer } from 'node:buffer';
++import childProcess from 'node:child_process';
++import { constants as fsConstants } from 'node:fs'; // TODO: Move this to the above import when targeting Node.js 18.
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import process from 'node:process';
++import { fileURLToPath } from 'node:url';
+ 
+ // Path to included `xdg-open`.
+ const __dirname = path.dirname(fileURLToPath(import.meta.url));
+ const localXdgOpenPath = path.join(__dirname, 'xdg-open');
+ 
+-const {platform, arch} = process;
++const { platform, arch } = process;
+ 
+ /**
+ Get the mount point for fixed drives in WSL.
+@@ -41,13 +41,13 @@ const getWslDrivesMountPoint = (() => {
+ 		try {
+ 			await fs.access(configFilePath, fsConstants.F_OK);
+ 			isConfigFileExists = true;
+-		} catch {}
++		} catch { }
+ 
+ 		if (!isConfigFileExists) {
+ 			return defaultMountPoint;
+ 		}
+ 
+-		const configContent = await fs.readFile(configFilePath, {encoding: 'utf8'});
++		const configContent = await fs.readFile(configFilePath, { encoding: 'utf8' });
+ 		const configMountPoint = /(?<!#.*)root\s*=\s*(?<mountPoint>.*)/g.exec(configContent);
+ 
+ 		if (!configMountPoint) {
+@@ -91,7 +91,7 @@ const baseOpen = async options => {
+ 		}));
+ 	}
+ 
+-	let {name: app, arguments: appArguments = []} = options.app ?? {};
++	let { name: app, arguments: appArguments = [] } = options.app ?? {};
+ 	appArguments = [...appArguments];
+ 
+ 	if (Array.isArray(app)) {
+@@ -156,6 +156,7 @@ const baseOpen = async options => {
+ 
+ 		if (options.background) {
+ 			cliArguments.push('--background');
++			cliArguments.push('--hide');
+ 		}
+ 
+ 		if (options.newInstance) {
+@@ -220,7 +221,7 @@ const baseOpen = async options => {
+ 			try {
+ 				await fs.access(localXdgOpenPath, fsConstants.X_OK);
+ 				exeLocalXdgOpen = true;
+-			} catch {}
++			} catch { }
+ 
+ 			const useSystemXdgOpen = process.versions.electron
+ 				?? (platform === 'android' || isBundled || !exeLocalXdgOpen);
+@@ -285,7 +286,7 @@ export const openApp = (name, options) => {
+ 		throw new TypeError('Expected a `name`');
+ 	}
+ 
+-	const {arguments: appArguments = []} = options ?? {};
++	const { arguments: appArguments = [] } = options ?? {};
+ 	if (appArguments !== undefined && appArguments !== null && !Array.isArray(appArguments)) {
+ 		throw new TypeError('Expected `appArguments` as Array type');
+ 	}
+@@ -304,7 +305,7 @@ function detectArchBinary(binary) {
+ 		return binary;
+ 	}
+ 
+-	const {[arch]: archBinary} = binary;
++	const { [arch]: archBinary } = binary;
+ 
+ 	if (!archBinary) {
+ 		throw new Error(`${arch} is not supported`);
+@@ -313,7 +314,7 @@ function detectArchBinary(binary) {
+ 	return archBinary;
+ }
+ 
+-function detectPlatformBinary({[platform]: platformBinary}, {wsl}) {
++function detectPlatformBinary({ [platform]: platformBinary }, { wsl }) {
+ 	if (wsl && isWsl) {
+ 		return detectArchBinary(wsl);
+ 	}
