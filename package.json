@@ -611,6 +611,7 @@
             "Sequel Ace",
             "Querious",
             "Sequel Pro",
+            "DBeaver",
             "phpMyAdmin",
             "Adminer"
           ],
@@ -621,6 +622,7 @@
             "Requires Sequel Ace app. Available for Mac Only",
             "Requires Querious app. Available for Mac Only",
             "Requires Sequel Pro. Available for Mac Only",
+            "Requires DBeaver Available for Windows, Mac and Linux",
             "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
             "Requires Adminer service. If the service is still not installed the extension will give you the option to install it"
           ]
