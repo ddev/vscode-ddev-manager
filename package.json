@@ -336,6 +336,16 @@
         "category": "DDEV"
       },
       {
+        "command": "biatiddev.checkForUpdates",
+        "title": "Check for Updates",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.openDebugPanel",
+        "title": "Open Debug Panel",
+        "category": "DDEV"
+      },
+      {
         "command": "biatiddev.startDockerProvider",
         "title": "Start Docker Provider",
         "category": "DDEV"
