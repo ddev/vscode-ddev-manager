@@ -1,6 +1,24 @@
+---
+runme:
+  id: 01HGFFNJEV3JWEVE3CYJ3GGAH5
+  version: v2.0
+---
+
 # Change Log
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
+
+## v1.4.2
+
+- New: Added command to check for updates manually `Check for Updates`
+- New: Added command to `Open Debug Panel`
+- Improved: Exclude betas and rc from update checks
+- Fixed: Bug in external dependency preventing the extension to load on Windows using traditional installation
+- Fixed: Removed project name from database launch commands
+
+## v1.4.1
+
+- New: Added support for DBeaver that comes with DDEV v1.22.4
 
 ## v.1.4.0
 
