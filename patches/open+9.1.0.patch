@@ -1,5 +1,5 @@
 diff --git a/node_modules/open/index.js b/node_modules/open/index.js
-index c79501e..626d8bf 100644
+index c79501e..a550b86 100644
 --- a/node_modules/open/index.js
 +++ b/node_modules/open/index.js
 @@ -1,20 +1,20 @@
@@ -25,7 +25,8 @@ index c79501e..626d8bf 100644
 +import { fileURLToPath } from 'node:url';
  
  // Path to included `xdg-open`.
- const __dirname = path.dirname(fileURLToPath(import.meta.url));
+-const __dirname = path.dirname(fileURLToPath(import.meta.url));
++// const __dirname = path.dirname(fileURLToPath(import.meta.url));
  const localXdgOpenPath = path.join(__dirname, 'xdg-open');
  
 -const {platform, arch} = process;
