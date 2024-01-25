@@ -1,12 +1,11 @@
----
-runme:
-  id: 01HGFFNJEV3JWEVE3CYJ3GGAH5
-  version: v2.0
----
-
 # Change Log
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
+
+## v1.4.3
+
+- Improved: Progress notification on share to use the same UI as VS Code Port Forwarding
+- Fixed: Empty title in sidebar in VS Code 1.80 and up
 
 ## v1.4.2
 
