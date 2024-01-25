@@ -2,14 +2,14 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
     "url": "https://www.biati.com.mx"
   },
   "engines": {
-    "vscode": "^1.70.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
@@ -78,7 +78,7 @@
         {
           "id": "biatiddev",
           "icon": "assets/ddev-logo.svg",
-          "name": ""
+          "name": "DDEV Manager"
         }
       ]
     },
@@ -751,6 +751,7 @@
   },
   "scripts": {
     "postinstall": "npx patch-package",
+    "prepare": "patch-package",
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
     "watch": "webpack --watch",
