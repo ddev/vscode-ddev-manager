@@ -43,6 +43,7 @@ You can launch an SSH terminal for any of your running projects. Within the side
 ## Many more features
 
 - Sidebar to manage all your DDEV projects
+- Create fully functional projects with a single click
 - Use the command palette to run commands on the workspace you are working on
 - Start/Stop/Restart/Rename/Delete projects
 - Stop all projects except the selected one
@@ -55,11 +56,12 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Open the database with any application you want (PHP MyAdmin, TablePlus, Sequel Ace, etc.)
 - Easily edit php.ini, nginx.conf, apache.conf and other files
 - Enable/Disable XDebug
-- Automatically configure the debugger to work with Xdebug and DDEV when you enable Xdebug
+- Automatically configure the debugger to work with Xdebug and DDEV so you don't have to configure anything.
 - Launch configuration snippets for launch.json
 - Enable/Disable Share. Share your project outside of your local network
 - Automatically configure the PHP version in the editor. Used for providing version appropriate suggestions and diagnostics. It required a extension like PHP Intelephense or PHP by DEVSENSE
 - Integrated DDEV terminal
+- Use the command palette to list and open your projects in the active editor or a new window
 - Quickly launch projects in your browser
 - Quickly open the Config.yaml file
 - Poweroff DDEV
