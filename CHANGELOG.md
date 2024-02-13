@@ -2,6 +2,26 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v2.0.0
+
+- New: Automatic Full Project Installation. When creating a new project the extension will perform the entire installation and configuration so you have a fully functional site. Still in Beta, it can be disabled in the extension settings "automaticallyInstallProjectFiles". Full project installation work for the majority of project types: WordPress, Drupal 10, Drupal 9, Laravel, Moodle, Shopware 6, PHP, Typo3, Statamic, Silverstripe, CraftCMS and Backdrop. No idea how to install Magento without the need of credentials
+- New: Automatically Configure Debugger. The extension will automatically configure the launch.json and tasks.json files to automatically enable/disable Xdebug when step debugging. This feature can be disabled in the extension settings
+- New: Use the command palette to list and open your DDEV projects in the current editor or a new window, similar to what the extension Project Manager does.
+- New: Added new options in the sidebar project menu to open project in editor and open in a new editor window.
+- New: When importing a database and the project type is WordPress, the extension will check the imported database tables prefix and offer to update it to match DDEV
+- New: When importing a database and the project type is WordPress, the extension will check the imported database URL and offer to update it to use the DDEV project URL
+- New: This update sets the base to provide different configs and actions depending the project type, perform custom actions and more
+- New: New extension option to configure the location of progress notifications.
+- New: When creating a new project, if the selected folder contains an old DDEV project with a different name, the extension will ask if you want to overwrite it and if so it will make sure the old project is deleted and unlisted to avoid errors
+- Improved: Display progress notification when doing certain actions. Progress notifications will auto close on success, regular notifications require user interaction to be closed so they can be annoying
+- Improved: There were several changes in some commands
+- Improved: If there's an update, the notification will show a new action "Ignore this update", if clicked, that specific update will not be notified again in case you don't want to update
+- Improved: Extension settings were updated and reorganized
+- Fixed: Missing command alias Open in Browser
+- Removed: Xdebug option from menu as now it's configured automatically
+- Removed: Extension option "showSuccessNotifications"
+- Removed: Extension option "showStatusBarProcessIndicator"
+
 ## v1.4.3
 
 - Improved: Progress notification on share to use the same UI as VS Code Port Forwarding
