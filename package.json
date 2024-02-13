@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "1.4.3",
+  "version": "2.0.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -173,7 +173,13 @@
       },
       {
         "command": "biatiddev.openProjectInEditor",
-        "title": "Open Project in Editor",
+        "title": "Open in Current Window",
+        "category": "DDEV",
+        "icon": "$(empty-window)"
+      },
+      {
+        "command": "biatiddev.openProjectInNewEditor",
+        "title": "Open in New Window",
         "category": "DDEV",
         "icon": "$(empty-window)"
       },
@@ -349,6 +355,16 @@
         "command": "biatiddev.startDockerProvider",
         "title": "Start Docker Provider",
         "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.listProjectsToOpen",
+        "title": "List DDEV Projects to Open in Editor",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.listProjectsToOpenNewWindow",
+        "title": "List DDEV Projects to Open in New Editor Window",
+        "category": "DDEV"
       }
     ],
     "menus": {
@@ -513,13 +529,13 @@
           "group": "biatiddev_gc@2"
         },
         {
-          "command": "biatiddev.xdebugEnable",
-          "when": "viewItem == ddev_active && !ddev:xdebugEnabled",
+          "command": "biatiddev.openProjectInEditor",
+          "when": "viewItem",
           "group": "biatiddev_gd@4"
         },
         {
-          "command": "biatiddev.xdebugDisable",
-          "when": "viewItem == ddev_active && ddev:xdebugEnabled",
+          "command": "biatiddev.openProjectInNewEditor",
+          "when": "viewItem",
           "group": "biatiddev_gd@5"
         },
         {
@@ -579,6 +595,18 @@
         {
           "command": "biatiddev.launch",
           "when": "false"
+        },
+        {
+          "command": "biatiddev.openProjectInEditor",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.openProjectInNewEditor",
+          "when": "false"
+        },
+        {
+          "command": "biatiddev.launchInBrowser",
+          "when": "false"
         }
       ]
     },
@@ -637,11 +665,15 @@
             "Requires Adminer service. If the service is still not installed the extension will give you the option to install it"
           ]
         },
-        "ddevManager.automaticallyConfigureWorkspacePHP": {
+        "ddevManager.progressNotificationsDisplay": {
           "order": 4,
-          "type": "boolean",
-          "default": true,
-          "description": "If enabled, the extension will get the PHP version configured on your DDEV project and will configure the workspace to use the same version so you can get appropriate suggestions and diagnostics. You need to install a PHP intellisen extension in order for this to work, currently it supports the following extensions: PHP Intelephense and PHP by Devsense"
+          "type": "string",
+          "default": "Information Message",
+          "enum": [
+            "Information Message",
+            "Status Bar"
+          ],
+          "description": "How some notifications with progress should be displayed. (for example for commands like start, stop, restart, power off, etc.)"
         },
         "ddevManager.showProjectsList": {
           "order": 5,
@@ -656,53 +688,89 @@
             "Display only the DDEV project for the current workspace, if not found the full list will be displayed"
           ]
         },
-        "ddevManager.showServicesExpandedInSidebar": {
+        "ddevManager.automaticallyInstallProjectFiles": {
           "order": 6,
+          "type": "boolean",
+          "default": false,
+          "description": "BETA: When adding a new project, the extension will attempt a fully automated installation by adding the project CMS files and executing the necessary project configurations. This feature is in beta and does not work for all project types, it will improve in the future."
+        },
+        "ddevManager.automaticallyConfigureWorkspacePHP": {
+          "order": 7,
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, the extension will get the PHP version configured on your DDEV project and will configure the workspace to use the same version so you can get appropriate suggestions and diagnostics. You need to install a PHP intellisen extension in order for this to work, currently it supports the following extensions: PHP Intelephense and PHP by Devsense"
+        },
+        "ddevManager.automaticallyConfigureDebugger": {
+          "order": 8,
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, the extension will automatically configure the launch.json and tasks.json files so XDebug is automatically enabled/disabled when step debugging is started or stopped"
+        },
+        "ddevManager.showServicesExpandedInSidebar": {
+          "order": 9,
           "type": "boolean",
           "default": true,
           "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
         },
         "ddevManager.showUnofficialServicesAndAddons": {
-          "order": 7,
+          "order": 10,
           "type": "boolean",
           "default": false,
           "description": "By default only official add-ons will listed when installing a new service/add-on, to list unofficial add-ons enable this option. Please note unofficial add-ons may not be necessarily supported or tested and are maintained by the community"
         },
-        "ddevManager.showSuccessNotifications": {
-          "order": 8,
-          "type": "boolean",
-          "default": true,
-          "description": "Show a notification after calling commands using the command palette and everything worked correctly (only for some commands like start, stop, restart or power off). You will always get notifications if the command failed."
-        },
-        "ddevManager.showStatusBarProcessIndicator": {
-          "order": 9,
-          "type": "boolean",
-          "default": true,
-          "description": "Show a spinning indicator when calling commands using the command palette to indicate that the command is being executed, if clicked it will display the command output so you can see what DDEV is returning in real time."
-        },
         "ddevManager.createSnapshotOnProjectStop": {
-          "order": 10,
+          "order": 11,
           "type": "boolean",
           "default": false,
           "description": "Automatically create a database snapshot when stopping a project, This serves as a precautionary measure in the event that your containers become corrupted or destroyed. Snapshots are stored inside the .ddev folder"
         },
         "ddevManager.omitSnapshotOnProjectDelete": {
-          "order": 11,
+          "order": 12,
           "type": "boolean",
           "default": false,
           "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created."
         },
         "ddevManager.deleteDDEVFolder": {
-          "order": 12,
+          "order": 13,
           "type": "boolean",
           "default": false,
           "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
         },
         "ddevManager.checkForUpdates": {
-          "order": 13,
+          "order": 14,
           "type": "boolean",
           "default": true,
           "description": "Check for new versions of DDEV"
+        },
+        "ddevManager.wordpress.updateTablePrefixAfterDatabaseImport": {
+          "order": 15,
+          "type": "string",
+          "default": "Ask",
+          "enum": [
+            "Ask",
+            "Always",
+            "Never"
+          ],
+          "enumDescriptions": [
+            "After database import if the table prefix is different ask if i want to update it",
+            "After database import if the table prefix is different automatically update it to match DDEV",
+            "Do nothing, don't update the database tables prefix"
+          ]
+        },
+        "ddevManager.wordpress.updateURLAfterDatabaseImport": {
+          "order": 16,
+          "type": "string",
+          "default": "Ask",
+          "enum": [
+            "Ask",
+            "Always",
+            "Never"
+          ],
+          "enumDescriptions": [
+            "After database import if the URL is different from the DDEV project ask if i want to update it",
+            "After database import if the URL is different from the DDEV project automatically update it to use the DDEV project URL",
+            "Do nothing, don't update the URL's in the database"
+          ]
         }
       }
     },
