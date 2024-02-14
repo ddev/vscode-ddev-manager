@@ -2,6 +2,14 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v2.0.2
+
+- Improved: Sidebar Sync improved
+
+## v2.0.1
+
+- Improved: When starting the debugger, the Xdebug task will not open the terminal unless there's an error.
+
 ## v2.0.0
 
 - New: Automatic Full Project Installation. When creating a new project the extension will perform the entire installation and configuration so you have a fully functional site. Still in Beta, it can be disabled in the extension settings "automaticallyInstallProjectFiles". Full project installation work for the majority of project types: WordPress, Drupal 10, Drupal 9, Laravel, Moodle, Shopware 6, PHP, Typo3, Statamic, Silverstripe, CraftCMS and Backdrop. No idea how to install Magento without the need of credentials
