@@ -2,6 +2,11 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v2.1.0
+
+- Improved: Add-ons list now use a file based cache and the list it's updated every 7 days, searching Add-ons should be a lot faster.
+- New: Add-ons list now display information about the repo so add-ons with the same name can also be identified by the owner name. Also now you can search by repo description, name, etc.
+
 ## v2.0.2
 
 - Improved: Sidebar Sync improved
