@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -25,7 +25,8 @@
     "deploy"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:workbench.action.tasks.runTask"
   ],
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -786,6 +787,42 @@
     "breakpoints": [
       {
         "language": "php"
+      }
+    ],
+    "taskDefinitions": [
+      {
+        "type": "ddev",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "The command to run on the container"
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "dir": {
+                "type": "string",
+                "description": "The directory inside the Docker container where the command will run"
+              },
+              "project": {
+                "type": "string",
+                "description": "The project ID where you want to run the command, defaults to the current project in workspace"
+              },
+              "sudo": {
+                "type": "boolean",
+                "description": "Whether to run the command with sudo"
+              },
+              "raw": {
+                "type": "boolean",
+                "description": "If true, the command will be executed directly instead of being interpreted by Bash. Please note that if it's set to true, you cannot use environment variables, pipes, redirection, etc."
+              }
+            },
+            "description": "Additional options to pass to the command"
+          }
+        }
       }
     ],
     "debuggers": [
