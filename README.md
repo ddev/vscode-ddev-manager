@@ -52,6 +52,7 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Launch Installed Services (Adminer, Mailhog, phpMyAdmin, etc.)
 - Create/Restore/Clear Snapshots
 - Import/Export databases
+- Tasks Provider. Define tasks that will run inside the container of your current project or any other DDEV project
 - Option to automatically create a database snapshot when you stop a project
 - Open the database with any application you want (PHP MyAdmin, TablePlus, Sequel Ace, etc.)
 - Easily edit php.ini, nginx.conf, apache.conf and other files
