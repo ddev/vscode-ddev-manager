@@ -2,6 +2,16 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## v2.2.0
+
+- New: Tasks Provider. You can now define tasks that will run directly in the container (or any other project you want), just set the task type to "ddev" and that's it. You'll have full access to the container and all the binaries that live there
+- Improved: Projects Cache
+- Fixed: Duplicate error message when trying to restore a spanshot in a project with no spanshots
+
+## v2.1.1
+
+- Fixed: Command "listProjectsToOpenNewWindow" was not opening projects in new window
+
 ## v2.1.0
 
 - Improved: Add-ons list now use a file based cache and the list it's updated every 7 days, searching Add-ons should be a lot faster.
