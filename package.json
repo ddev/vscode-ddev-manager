@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "2.2.0",
+  "version": "2.4.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -56,8 +56,13 @@
       },
       {
         "view": "biatiddev",
+        "contents": "Could not connect to a docker provider. Start or install a docker provider.\n[Starting Docker...](command:biatiddev.void)\nTo learn more about how to use DDEV [read the docs](https://ddev.readthedocs.io).",
+        "when": "ddev:dockerStarting && ddev:dockerNotRunning"
+      },
+      {
+        "view": "biatiddev",
         "contents": "Could not connect to a docker provider. Start or install a docker provider.\n[Start Docker Provider](command:biatiddev.startDockerProvider)\nTo learn more about how to use DDEV [read the docs](https://ddev.readthedocs.io).",
-        "when": "!ddev:isConnecting && ddev:dockerNotRunning"
+        "when": "ddev:dockerNotRunning && !ddev:dockerStarting"
       },
       {
         "view": "biatiddev",
@@ -91,6 +96,11 @@
       }
     ],
     "commands": [
+      {
+        "command": "biatiddev.emptyExtensionCache",
+        "title": "Empty Extension Cache",
+        "category": "DDEV"
+      },
       {
         "command": "biatiddev.start",
         "title": "Start",
@@ -160,6 +170,11 @@
         "title": "Open Database Administration",
         "category": "DDEV",
         "icon": "$(link-external)"
+      },
+      {
+        "command": "biatiddev.launchDBExternally",
+        "title": "Open Database with...",
+        "category": "DDEV"
       },
       {
         "command": "biatiddev.openConfigFile",
@@ -366,6 +381,35 @@
         "command": "biatiddev.listProjectsToOpenNewWindow",
         "title": "List DDEV Projects to Open in New Editor Window",
         "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.mutagenReset",
+        "title": "Mutagen Reset",
+        "category": "DDEV"
+      },
+      {
+        "command": "biatiddev.wordpressEnableDebug",
+        "title": "Enable Debug",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress && ddev:wordPressDebugEnabled == false"
+      },
+      {
+        "command": "biatiddev.wordpressEnableSilentDebug",
+        "title": "Enable Silent Debug",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress &&  ddev:wordPressDebugEnabled == false"
+      },
+      {
+        "command": "biatiddev.wordpressDisableDebug",
+        "title": "Disable Debug",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress && !ddev:wordPressSilentDebug && ddev:wordPressDebugEnabled == true"
+      },
+      {
+        "command": "biatiddev.wordpressDisableSilentDebug",
+        "title": "Disable Silent Debug",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress && ddev:wordPressSilentDebug && ddev:wordPressDebugEnabled == true"
       }
     ],
     "menus": {
@@ -611,170 +655,208 @@
         }
       ]
     },
-    "configuration": {
-      "title": "DDEV Manager",
-      "properties": {
-        "ddevManager.dockerProvider": {
-          "order": 1,
-          "type": "string",
-          "default": "Not configured",
-          "enum": [
-            "Not configured",
-            "Docker Desktop",
-            "Docker CE",
-            "OrbStack",
-            "Colima"
-          ],
-          "description": "Select the Docker provider you are currently using",
-          "enumDescriptions": [
-            "Select a valid option so DDEV Manager is able to launch the docker provider if required",
-            "Docker Desktop Application.",
-            "Docker CE inside WSL2 running on Ubuntu",
-            "OrbStack Application. macOS only",
-            "Colima macOS and Linux"
-          ]
-        },
-        "ddevManager.colimaConfiguration": {
-          "order": 2,
-          "type": "string",
-          "default": "--cpu=2 --memory=4",
-          "description": "If you are using Colima as a Docker provider you can customize the VM"
-        },
-        "ddevManager.defaultDatabaseManager": {
-          "order": 3,
-          "type": "string",
-          "default": "Not configured",
-          "enum": [
-            "Not configured",
-            "TablePlus",
-            "Sequel Ace",
-            "Querious",
-            "Sequel Pro",
-            "DBeaver",
-            "phpMyAdmin",
-            "Adminer"
-          ],
-          "description": "Select the database manager you want to use",
-          "enumDescriptions": [
-            "Select a valid option to be able to open the database directly with DDEV Manager",
-            "Requires TablePlus app. Available for Mac and Windows",
-            "Requires Sequel Ace app. Available for Mac Only",
-            "Requires Querious app. Available for Mac Only",
-            "Requires Sequel Pro. Available for Mac Only",
-            "Requires DBeaver Available for Windows, Mac and Linux",
-            "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
-            "Requires Adminer service. If the service is still not installed the extension will give you the option to install it"
-          ]
-        },
-        "ddevManager.progressNotificationsDisplay": {
-          "order": 4,
-          "type": "string",
-          "default": "Information Message",
-          "enum": [
-            "Information Message",
-            "Status Bar"
-          ],
-          "description": "How some notifications with progress should be displayed. (for example for commands like start, stop, restart, power off, etc.)"
-        },
-        "ddevManager.showProjectsList": {
-          "order": 5,
-          "type": "string",
-          "default": "All Projects",
-          "enum": [
-            "All Projects",
-            "Current Workspace"
-          ],
-          "enumDescriptions": [
-            "Display all DDEV Projects",
-            "Display only the DDEV project for the current workspace, if not found the full list will be displayed"
-          ]
-        },
-        "ddevManager.automaticallyInstallProjectFiles": {
-          "order": 6,
-          "type": "boolean",
-          "default": false,
-          "description": "BETA: When adding a new project, the extension will attempt a fully automated installation by adding the project CMS files and executing the necessary project configurations. This feature is in beta and does not work for all project types, it will improve in the future."
-        },
-        "ddevManager.automaticallyConfigureWorkspacePHP": {
-          "order": 7,
-          "type": "boolean",
-          "default": true,
-          "description": "If enabled, the extension will get the PHP version configured on your DDEV project and will configure the workspace to use the same version so you can get appropriate suggestions and diagnostics. You need to install a PHP intellisen extension in order for this to work, currently it supports the following extensions: PHP Intelephense and PHP by Devsense"
-        },
-        "ddevManager.automaticallyConfigureDebugger": {
-          "order": 8,
-          "type": "boolean",
-          "default": true,
-          "description": "If enabled, the extension will automatically configure the launch.json and tasks.json files so XDebug is automatically enabled/disabled when step debugging is started or stopped"
-        },
-        "ddevManager.showServicesExpandedInSidebar": {
-          "order": 9,
-          "type": "boolean",
-          "default": true,
-          "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
-        },
-        "ddevManager.showUnofficialServicesAndAddons": {
-          "order": 10,
-          "type": "boolean",
-          "default": false,
-          "description": "By default only official add-ons will listed when installing a new service/add-on, to list unofficial add-ons enable this option. Please note unofficial add-ons may not be necessarily supported or tested and are maintained by the community"
-        },
-        "ddevManager.createSnapshotOnProjectStop": {
-          "order": 11,
-          "type": "boolean",
-          "default": false,
-          "description": "Automatically create a database snapshot when stopping a project, This serves as a precautionary measure in the event that your containers become corrupted or destroyed. Snapshots are stored inside the .ddev folder"
-        },
-        "ddevManager.omitSnapshotOnProjectDelete": {
-          "order": 12,
-          "type": "boolean",
-          "default": false,
-          "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created."
-        },
-        "ddevManager.deleteDDEVFolder": {
-          "order": 13,
-          "type": "boolean",
-          "default": false,
-          "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
-        },
-        "ddevManager.checkForUpdates": {
-          "order": 14,
-          "type": "boolean",
-          "default": true,
-          "description": "Check for new versions of DDEV"
-        },
-        "ddevManager.wordpress.updateTablePrefixAfterDatabaseImport": {
-          "order": 15,
-          "type": "string",
-          "default": "Ask",
-          "enum": [
-            "Ask",
-            "Always",
-            "Never"
-          ],
-          "enumDescriptions": [
-            "After database import if the table prefix is different ask if i want to update it",
-            "After database import if the table prefix is different automatically update it to match DDEV",
-            "Do nothing, don't update the database tables prefix"
-          ]
-        },
-        "ddevManager.wordpress.updateURLAfterDatabaseImport": {
-          "order": 16,
-          "type": "string",
-          "default": "Ask",
-          "enum": [
-            "Ask",
-            "Always",
-            "Never"
-          ],
-          "enumDescriptions": [
-            "After database import if the URL is different from the DDEV project ask if i want to update it",
-            "After database import if the URL is different from the DDEV project automatically update it to use the DDEV project URL",
-            "Do nothing, don't update the URL's in the database"
-          ]
+    "configuration": [
+      {
+        "title": "DDEV Manager",
+        "properties": {
+          "ddevManager.progressNotificationsDisplay": {
+            "order": 4,
+            "type": "string",
+            "default": "Information Message",
+            "enum": [
+              "Information Message",
+              "Status Bar"
+            ],
+            "description": "How some notifications with progress should be displayed. (for example for commands like start, stop, restart, power off, etc.)"
+          },
+          "ddevManager.showProjectsList": {
+            "order": 5,
+            "type": "string",
+            "default": "All Projects",
+            "enum": [
+              "All Projects",
+              "Current Workspace"
+            ],
+            "enumDescriptions": [
+              "Display all DDEV Projects",
+              "Display only the DDEV project for the current workspace, if not found the full list will be displayed"
+            ],
+            "description": "Choose how to display the projects list in the sidebar"
+          },
+          "ddevManager.projectsListNameFormat": {
+            "order": 6,
+            "type": "string",
+            "default": "Default",
+            "enum": [
+              "Default",
+              "Style 1",
+              "Style 2",
+              "Style 3"
+            ],
+            "enumDescriptions": [
+              "awesome-project.ddev.site is displayed as awesome-project",
+              "awesome-project.ddev.site is displayed as awesome project",
+              "awesome-project.ddev.site is displayed as Awesome project",
+              "awesome-project.ddev.site is displayed as Awesome Project"
+            ],
+            "description": "Choose how the project name should be displayed in the sidebar"
+          },
+          "ddevManager.automaticallyInstallProjectFiles": {
+            "order": 7,
+            "type": "boolean",
+            "default": false,
+            "description": "BETA: When adding a new project, the extension will attempt a fully automated installation by adding the project CMS files and executing the necessary project configurations. This feature is in beta and does not work for all project types, it will improve in the future."
+          },
+          "ddevManager.automaticallyConfigureWorkspacePHP": {
+            "order": 8,
+            "type": "boolean",
+            "default": true,
+            "description": "If enabled, the extension will get the PHP version configured on your DDEV project and will configure the workspace to use the same version so you can get appropriate suggestions and diagnostics. You need to install a PHP intellisen extension in order for this to work, currently it supports the following extensions: PHP Intelephense and PHP by Devsense"
+          },
+          "ddevManager.automaticallyConfigureDebugger": {
+            "order": 9,
+            "type": "boolean",
+            "default": true,
+            "description": "If enabled, the extension will automatically configure the launch.json and tasks.json files so XDebug is automatically enabled/disabled when step debugging is started or stopped"
+          },
+          "ddevManager.showServicesExpandedInSidebar": {
+            "order": 10,
+            "type": "boolean",
+            "default": true,
+            "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
+          },
+          "ddevManager.showUnofficialServicesAndAddons": {
+            "order": 11,
+            "type": "boolean",
+            "default": false,
+            "description": "By default only official add-ons will listed when installing a new service/add-on, to list unofficial add-ons enable this option. Please note unofficial add-ons may not be necessarily supported or tested and are maintained by the community"
+          },
+          "ddevManager.deleteDDEVFolder": {
+            "order": 12,
+            "type": "boolean",
+            "default": false,
+            "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
+          },
+          "ddevManager.checkForUpdates": {
+            "order": 13,
+            "type": "boolean",
+            "default": true,
+            "description": "Check for new versions of DDEV"
+          }
+        }
+      },
+      {
+        "title": "Docker",
+        "properties": {
+          "ddevManager.dockerProvider": {
+            "order": 1,
+            "type": "string",
+            "default": "Not configured",
+            "enum": [
+              "Not configured",
+              "Docker Desktop",
+              "Docker CE",
+              "OrbStack",
+              "Colima"
+            ],
+            "description": "Select the Docker provider you are currently using",
+            "enumDescriptions": [
+              "Select a valid option so DDEV Manager is able to launch the docker provider if required",
+              "Docker Desktop Application.",
+              "Docker CE inside WSL2 running on Ubuntu",
+              "OrbStack Application. macOS only",
+              "Colima macOS and Linux"
+            ]
+          },
+          "ddevManager.colimaConfiguration": {
+            "order": 2,
+            "type": "string",
+            "default": "--cpu=2 --memory=4",
+            "description": "If you are using Colima as a Docker provider you can customize the VM"
+          }
+        }
+      },
+      {
+        "title": "Database",
+        "properties": {
+          "ddevManager.defaultDatabaseManager": {
+            "order": 3,
+            "type": "string",
+            "default": "Not configured",
+            "enum": [
+              "Not configured",
+              "TablePlus",
+              "Sequel Ace",
+              "Querious",
+              "Sequel Pro",
+              "DBeaver",
+              "phpMyAdmin",
+              "Adminer",
+              "VS Code Extension: Database Client"
+            ],
+            "description": "Select the database manager you want to use",
+            "enumDescriptions": [
+              "Select a valid option to be able to open the database directly with DDEV Manager",
+              "Requires TablePlus app. Available for Mac and Windows",
+              "Requires Sequel Ace app. Available for Mac Only",
+              "Requires Querious app. Available for Mac Only",
+              "Requires Sequel Pro. Available for Mac Only",
+              "Requires DBeaver Available for Windows, Mac and Linux",
+              "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
+              "Requires Adminer service. If the service is still not installed the extension will give you the option to install it",
+              "Requires Database Client VS Code extension."
+            ]
+          },
+          "ddevManager.createSnapshotOnProjectStop": {
+            "order": 11,
+            "type": "boolean",
+            "default": false,
+            "description": "Automatically create a database snapshot when stopping a project, This serves as a precautionary measure in the event that your containers become corrupted or destroyed. Database snapshots are stored inside the .ddev folder"
+          },
+          "ddevManager.omitSnapshotOnProjectDelete": {
+            "order": 12,
+            "type": "boolean",
+            "default": false,
+            "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created."
+          }
+        }
+      },
+      {
+        "title": "WordPress",
+        "properties": {
+          "ddevManager.wordpress.updateTablePrefixAfterDatabaseImport": {
+            "order": 15,
+            "type": "string",
+            "default": "Ask",
+            "enum": [
+              "Ask",
+              "Always",
+              "Never"
+            ],
+            "enumDescriptions": [
+              "After database import if the table prefix is different ask if i want to update it",
+              "After database import if the table prefix is different automatically update it to match DDEV",
+              "Do nothing, don't update the database tables prefix"
+            ]
+          },
+          "ddevManager.wordpress.updateURLAfterDatabaseImport": {
+            "order": 16,
+            "type": "string",
+            "default": "Ask",
+            "enum": [
+              "Ask",
+              "Always",
+              "Never"
+            ],
+            "enumDescriptions": [
+              "After database import if the URL is different from the DDEV project ask if i want to update it",
+              "After database import if the URL is different from the DDEV project automatically update it to use the DDEV project URL",
+              "Do nothing, don't update the URL's in the database"
+            ]
+          }
         }
       }
-    },
+    ],
     "terminal": {
       "profiles": [
         {
