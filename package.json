@@ -397,7 +397,7 @@
         "command": "biatiddev.wordpressEnableSilentDebug",
         "title": "Enable Silent Debug",
         "category": "DDEV WordPress",
-        "enablement": "ddev:projectType == wordpress &&  ddev:wordPressDebugEnabled == false"
+        "enablement": "ddev:projectType == wordpress && ddev:wordPressSilentDebug == false"
       },
       {
         "command": "biatiddev.wordpressDisableDebug",
