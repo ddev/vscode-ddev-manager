@@ -410,6 +410,18 @@
         "title": "Disable Silent Debug",
         "category": "DDEV WordPress",
         "enablement": "ddev:projectType == wordpress && ddev:wordPressSilentDebug && ddev:wordPressDebugEnabled == true"
+      },
+      {
+        "command": "biatiddev.wordpressOpenConfigFile",
+        "title": "Open wp-config.php",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress"
+      },
+      {
+        "command": "biatiddev.wordpressOpenDDEVConfigFile",
+        "title": "Open wp-config-ddev.php",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress && ddev:wordPressHasDDEVConfigFile == true"
       }
     ],
     "menus": {
@@ -861,7 +873,7 @@
       "profiles": [
         {
           "icon": "$(code)",
-          "id": "biatiddev.sshterminal",
+          "id": "biatiddev.sshterminalProvider",
           "title": "DDEV SSH"
         }
       ]
