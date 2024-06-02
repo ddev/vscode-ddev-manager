@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
