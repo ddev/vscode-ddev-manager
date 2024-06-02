@@ -2,6 +2,22 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.5.1] - 2024-06-02
+
+- Changed: This update only disables some features that are not ready yet for public use and were included by mistake in 2.5.0
+
+## [2.5.0] - 2024-06-02
+
+- New: Added new command: "Start New SSH session" forces to create new SSH sessions ignoring any existing sessions
+- New: Added new command: "Open wp-config.php" command is displayed only for WordPress projects
+- New: Added new command: "Open wp-config-ddev.php" command is displayed only for WordPress projects
+- Changed: Command "Start SSH session" when called it will try to reuse an existing SSH terminal. If a current SSH session exists, that terminal will be displayed, if not a new terminal will be created, the user still can create new SSH terminals with the command "Start New SSH session"
+- Improved: Node-PTY integration for terminals
+- Improved: Additional checks for WordPress to detect Debug status when workspace is opened
+- Fixed: SSH terminal (node-pty) UI glitch
+- Fixed: Share terminal if the user clicks the status bar item. Before the ngrok process was cropped, now it should be displayed correctly.
+- Fixed: WordPress commands correctly set the context in the editor
+
 ## [2.4.0] - 2024-05-28
 
 - New: Added new command: "Empty Extension Cache" removes cache for add-ons and projects installers
