@@ -2,6 +2,14 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.5.2] - 2024-08-09
+
+- New: Added new command: "Delete Snaphot" to delete individual snapshots from project
+- New: Added new command: "Open debug log" command is displayed only for WordPress projects, after the debug file is opened it will scroll automatically to the end to enable "Log File Tale Mode" for automatic scroll
+- New: After snapshot is restored the WordPress debug state is restored
+- Improved: Recheck database config after snapshot is restored
+- Fixed: Postgres database type was not properly displayed in sidebar
+
 ## [2.5.1] - 2024-06-02
 
 - Changed: This update only disables some features that are not ready yet for public use and were included by mistake in 2.5.0
