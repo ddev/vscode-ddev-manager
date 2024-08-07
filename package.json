@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -422,6 +422,12 @@
         "title": "Open wp-config-ddev.php",
         "category": "DDEV WordPress",
         "enablement": "ddev:projectType == wordpress && ddev:wordPressHasDDEVConfigFile == true"
+      },
+      {
+        "command": "biatiddev.wordpressOpenDebugLog",
+        "title": "Open debug.log",
+        "category": "DDEV WordPress",
+        "enablement": "ddev:projectType == wordpress"
       }
     ],
     "menus": {
