@@ -211,6 +211,11 @@
         "category": "DDEV"
       },
       {
+        "command": "biatiddev.deleteSnapshot",
+        "title": "Delete Snapshot",
+        "category": "DDEV"
+      },
+      {
         "command": "biatiddev.restoreSnapshot",
         "title": "Restore Snapshot",
         "category": "DDEV"
@@ -558,6 +563,11 @@
         },
         {
           "command": "biatiddev.createSnapshot",
+          "when": "viewItem == ddev_active",
+          "group": "biatiddev_gb@1"
+        },
+        {
+          "command": "biatiddev.deleteSnapshot",
           "when": "viewItem == ddev_active",
           "group": "biatiddev_gb@1"
         },
