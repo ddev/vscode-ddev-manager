@@ -2,6 +2,10 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.6.1] - 2024-09-13
+
+- Fixed: Disable exposed commands feature
+
 ## [2.6.0] - 2024-09-04
 
 - New: Added new command: "Delete Snaphot" to delete individual snapshots from project
