@@ -2,6 +2,11 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.6.3] - 2024-10-06
+
+- Fixed: ngrok share progress notification not dismissed when ngrok was not found in path
+- Fixed: ngrok show error if starting a new share when already sharing
+
 ## [2.6.2] - 2024-09-18
 
 - Fixed: WordPress project full installer
