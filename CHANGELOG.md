@@ -2,6 +2,11 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.6.4] - 2025-01-09
+
+- Improved: added more debug logs to find execution errors faster
+- code cleanup
+
 ## [2.6.3] - 2024-10-06
 
 - Fixed: ngrok share progress notification not dismissed when ngrok was not found in path
