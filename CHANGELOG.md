@@ -2,6 +2,12 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.6.5] - 2025-01-14
+
+- Fixed: spawn a terminal failed in VSCode 1.95+ becase Microsoft moved node-pty (macOS)
+- Updated: PHP and NodeJS versions
+- Changed: The extension now requires VSCode 1.95+
+
 ## [2.6.4] - 2025-01-09
 
 - Improved: added more debug logs to find execution errors faster
