@@ -2,14 +2,14 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "2.6.3",
+  "version": "2.6.5",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
     "url": "https://www.biati.com.mx"
   },
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.95.0"
   },
   "categories": [
     "Other"
@@ -457,6 +457,11 @@
           "command": "biatiddev.addProject",
           "when": "view == biatiddev && ddev:isRunning",
           "group": "navigation@1"
+        },
+        {
+          "command": "biatiddev.exposeCommands",
+          "when": "view == biatiddev && ddev:isRunning",
+          "group": "navigation@2"
         },
         {
           "command": "biatiddev.treeReloadList",
