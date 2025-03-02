@@ -1,2 +1,6 @@
 github: ["biati-digital"]
-custom: ["Ko-fi.com/biatidigital", "https://buy.stripe.com/9AQbK2gPC5o73Fm7sz"]
+custom:
+  [
+    "https://ko-fi.com/biatidigital",
+    "https://buy.stripe.com/9AQbK2gPC5o73Fm7sz",
+  ]
