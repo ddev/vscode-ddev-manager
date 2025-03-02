@@ -2,6 +2,12 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [2.7.0] - 2025-03-02
+
+- Updated: Updated some commands to match the new DDEV commands
+- Updated: Code has been cleaned and refactored
+- Fixed: In some cases, success notifications were not displayed correctly
+
 ## [2.6.5] - 2025-01-14
 
 - Fixed: spawn a terminal failed in VSCode 1.95+ becase Microsoft moved node-pty (macOS)
