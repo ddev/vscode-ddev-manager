@@ -1,14 +1,16 @@
-import * as vscode from 'vscode';
+import type { ExtensionContext } from "vscode";
+import { getManager, initializeGlobals } from "./common/global";
 import { DDEVManager } from "./ddev/ddevManager";
 
-let controller: DDEVManager;
+export function activate(context: ExtensionContext) {
+	initializeGlobals(context);
 
-export function activate(context: vscode.ExtensionContext) {
-	controller = new DDEVManager(context);
+	const controller = new DDEVManager();
 	controller.activate();
 }
 
 export function deactivate() {
+	const controller = getManager();
 	if (controller) {
 		controller.deactivate();
 	}
