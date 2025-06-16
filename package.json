@@ -2,14 +2,14 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "2.7.0",
+  "version": "3.0.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
     "url": "https://www.biati.com.mx"
   },
   "engines": {
-    "vscode": "^1.95.0"
+    "vscode": "^1.101.0"
   },
   "categories": [
     "Other"
@@ -25,7 +25,7 @@
     "deploy"
   ],
   "activationEvents": [
-    "onStartupFinished",
+    "onLanguage",
     "onCommand:workbench.action.tasks.runTask"
   ],
   "icon": "assets/icon.png",
@@ -338,12 +338,12 @@
       },
       {
         "command": "biatiddev.addService",
-        "title": "Add Services",
+        "title": "Install Add-ons",
         "category": "DDEV"
       },
       {
         "command": "biatiddev.deleteService",
-        "title": "Delete Services",
+        "title": "Uninstall Add-ons",
         "category": "DDEV"
       },
       {
@@ -435,9 +435,9 @@
         "enablement": "ddev:projectType == wordpress"
       },
       {
-        "command": "biatiddev.exposeCommands",
-        "title": "Expose Container Binaries",
-        "category": "DDEV",
+        "command": "biatiddev.exposeFromContainer",
+        "title": "Configure Expose From Container",
+        "category": "DDEV Expose",
         "icon": "$(terminal)"
       }
     ],
@@ -459,7 +459,7 @@
           "group": "navigation@1"
         },
         {
-          "command": "biatiddev.exposeCommands",
+          "command": "biatiddev.exposeFromContainer",
           "when": "view == biatiddev && ddev:isRunning",
           "group": "navigation@2"
         },
@@ -744,7 +744,7 @@
             "order": 7,
             "type": "boolean",
             "default": false,
-            "description": "BETA: When adding a new project, the extension will attempt a fully automated installation by adding the project CMS files and executing the necessary project configurations. This feature is in beta and does not work for all project types, it will improve in the future."
+            "description": "When adding a new project, the extension will attempt a fully automated installation by adding the project CMS files and executing the necessary project configurations."
           },
           "ddevManager.automaticallyConfigureWorkspacePHP": {
             "order": 8,
@@ -831,6 +831,7 @@
               "DBeaver",
               "phpMyAdmin",
               "Adminer",
+              "VS Code Extension: DBCode",
               "VS Code Extension: Database Client"
             ],
             "description": "Select the database manager you want to use",
@@ -843,6 +844,7 @@
               "Requires DBeaver Available for Windows, Mac and Linux",
               "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
               "Requires Adminer service. If the service is still not installed the extension will give you the option to install it",
+              "Requires DBCode VS Code extension.",
               "Requires Database Client VS Code extension."
             ]
           },
@@ -857,6 +859,35 @@
             "type": "boolean",
             "default": false,
             "description": "When deleteing a project, by default DDEV creates a final snapshot of the database, if this option is enabled, snapshots will not be created."
+          }
+        }
+      },
+      {
+        "title": "Expose",
+        "properties": {
+          "ddevManager.registerPathsToExpose": {
+            "order": 12,
+            "scope": "application",
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Add custom paths to expose from the container. This is useful when you want to expose a binary from the container and it's not displayed in the config dropdown."
+          },
+          "ddevManager.exposed": {
+            "order": 13,
+            "scope": "application",
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "global": {
+                "scope": "application",
+                "type": "array"
+              },
+              "projects": {
+                "scope": "application",
+                "type": "object"
+              }
+            },
+            "description": "Do not modify. This config is updated automatically when you add or remove exposed commands."
           }
         }
       },
@@ -988,11 +1019,12 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "vscode:package": "vsce package",
-    "vscode:publish": "vsce publish",
+    "pack": "vsce package --allow-star-activation",
+    "publish": "vsce publish",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@types/glob": "^8.1.0",
     "@types/lodash-es": "^4.17.9",
     "@types/mocha": "^10.0.1",
@@ -1014,6 +1046,7 @@
     "webpack-shell-plugin-next": "^2.3.1"
   },
   "dependencies": {
+    "@asleepace/try": "^0.2.1",
     "@vscode/webview-ui-toolkit": "^1.2.1",
     "compare-versions": "^6.1.0",
     "croner": "^7.0.1",
@@ -1021,6 +1054,7 @@
     "node-fetch": "^3.3.2",
     "open": "^9.1.0",
     "rxjs": "^7.8.0",
+    "vsce": "^2.15.0",
     "ws": "^8.13.0",
     "yaml": "^2.2.1"
   }
