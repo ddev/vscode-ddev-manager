@@ -47,6 +47,7 @@ You can launch an SSH terminal for any of your running projects. Within the side
 - Use the command palette to run commands on the workspace you are working on
 - Start/Stop/Restart/Rename/Delete projects
 - Stop all projects except the selected one
+- Expose PHP, NodeJS, Composer and anything you want from the container to the host so extensions work normally
 - Change Services versions (PHP, NodeJS, Server, etc.)
 - Install/Uninstall Services
 - Launch Installed Services (Adminer, Mailhog, phpMyAdmin, etc.)
