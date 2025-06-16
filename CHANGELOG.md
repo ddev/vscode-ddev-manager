@@ -2,6 +2,41 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [3.0.0] - 2025-06-16
+
+- New: Expose from the container, allows you to use php, wp, drush, npm or any other binary, like if you were inside the container. Extensions, Tasks and terminals will be able to use everything you expose. You can configure it globally or by workspace.
+- New: The extension now downloads the DDEV schema from the Github repo to list available PHP versions, project types, etc.
+- New: Added support for DBCode database extension
+- New: Services was renamed to Add-ons
+- New: Now when uninstalling add-ons you can select multiple add-ons to uninstall
+- New: You can now install specific NodeJS versions like 18.2, 18.19.2, etc.
+- New: Added full install for Drupal 11
+- New: Added full install for Drupal CMS
+- New: Added full install for Cake PHP
+- New: Added full install for Astro JS
+- New: Added full install for Grav CMS
+- New: Added full install for Kyrby CMS
+- New: Added full install for Symfony
+- New: Added full install for Backdrop
+- New: Added full install for Statamic
+- New: Added full install for Moodle
+- Updated: All projects types updated
+- Updated: Improved projects support
+- Updated: Use command add-on instead of get
+- Updated: Debug Logger
+- Improved: Rename project action now works better
+- Improved: Add-ons install/Uninstall
+- Improved: A lot of the code has been rewritten to be cleaner
+- Improved: Error handling
+- Improved: Laravel installation
+- Fixed: Installing add-ons correctly shows the checkbox to select multiple
+- Fixed: In recent versions of VSCode, vscode.env.openExternal returns an error if URL contains port number so it was replaced with ddev launch to launch add-ons
+- Changed: The extension now requires VSCode 1.101.+
+
+## [2.7.1] - 2025-05-04
+
+- Fixed: Snapshot restore not showing correctly the snapshots list
+
 ## [2.7.0] - 2025-03-02
 
 - Updated: Updated some commands to match the new DDEV commands
