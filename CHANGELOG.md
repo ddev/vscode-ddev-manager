@@ -2,7 +2,7 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
-## [3.1.0] - 2025-08-05
+## [3.0.1] - 2025-08-05
 
 - New: Added an option to enable debugging. When enabled, it provides more logs and, when using exposed commands, creates files in the active workspace containing additional information such as environment variables, commands output, and more to assist with debugging.
 - New: Added new command `reloadExposeFromContainer` to reload the exposed commands. Only available when "debug" is enabled
