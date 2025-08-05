@@ -2,7 +2,17 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
-## [3.0.0] - 2025-06-16
+## [3.1.0] - 2025-08-05
+
+- New: Added an option to enable debugging. When enabled, it provides more logs and, when using exposed commands, creates files in the active workspace containing additional information such as environment variables, commands output, and more to assist with debugging.
+- New: Added new command `reloadExposeFromContainer` to reload the exposed commands. Only available when "debug" is enabled
+- Improved: Expose from container, implemented method to update the exposed commands if there's changes in DDEV custom Commands
+- Improved: Expose from container, the exposed commands were improved to handle more cases
+- Improved: Workspace validation: Added a warning when attempting to expose commands from a workspace that is not a DDEV project
+- Changed: The registerPathsToExpose setting now accepts an array of paths instead of an object to simplify the configuration
+- Changed: The list is now divided into two groups: official add-ons and unofficial add-ons, each group clearly labeled. Since add-ons are fetched in the background and cached for 7 days (for instant display), the showUnofficialServicesAndAddons option seems unnecessary. Hopefully this change will help users to know that there's a lot of add-ons available.
+
+## [3.0.0] - 2025-07-17
 
 - New: Expose from the container, allows you to use php, wp, drush, npm or any other binary, like if you were inside the container. Extensions, Tasks and terminals will be able to use everything you expose. You can configure it globally or by workspace.
 - New: The extension now downloads the DDEV schema from the Github repo to list available PHP versions, project types, etc.
@@ -24,6 +34,7 @@ All notable changes to the "ddev-manager" extension will be documented in this f
 - Updated: Improved projects support
 - Updated: Use command add-on instead of get
 - Updated: Debug Logger
+- Improved: WSL support. Disabled commands that are not needed or not possible to work in WSL
 - Improved: Rename project action now works better
 - Improved: Add-ons install/Uninstall
 - Improved: A lot of the code has been rewritten to be cleaner
