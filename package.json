@@ -2,14 +2,14 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
     "url": "https://www.biati.com.mx"
   },
   "engines": {
-    "vscode": "^1.101.0"
+    "vscode": "^1.102.0"
   },
   "categories": [
     "Other"
@@ -42,6 +42,21 @@
   },
   "license": "Apache-2.0",
   "main": "./dist/extension.js",
+  "scripts": {
+    "postinstall": "npx patch-package",
+    "prepare": "patch-package",
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "pack": "vsce package --allow-star-activation --no-dependencies",
+    "publish": "vsce publish --no-dependencies",
+    "test": "node ./out/test/runTest.js"
+  },
   "contributes": {
     "viewsWelcome": [
       {
@@ -439,6 +454,11 @@
         "title": "Configure Expose From Container",
         "category": "DDEV Expose",
         "icon": "$(terminal)"
+      },
+      {
+        "command": "biatiddev.reloadExposeFromContainer",
+        "title": "Reload Expose From Container",
+        "category": "DDEV Expose"
       }
     ],
     "menus": {
@@ -532,7 +552,7 @@
         },
         {
           "command": "biatiddev.revealInOS",
-          "when": "view == biatiddev && viewItem == ddev_path",
+          "when": "view == biatiddev && viewItem == ddev_path && ddev:wsl == false",
           "group": "inline@2"
         },
         {
@@ -691,6 +711,10 @@
         {
           "command": "biatiddev.launchInBrowser",
           "when": "false"
+        },
+        {
+          "command": "biatiddev.reloadExposeFromContainer",
+          "when": "ddev:debugEnabled"
         }
       ]
     },
@@ -764,23 +788,23 @@
             "default": true,
             "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
           },
-          "ddevManager.showUnofficialServicesAndAddons": {
-            "order": 11,
-            "type": "boolean",
-            "default": false,
-            "description": "By default only official add-ons will listed when installing a new service/add-on, to list unofficial add-ons enable this option. Please note unofficial add-ons may not be necessarily supported or tested and are maintained by the community"
-          },
           "ddevManager.deleteDDEVFolder": {
-            "order": 12,
+            "order": 11,
             "type": "boolean",
             "default": false,
             "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
           },
           "ddevManager.checkForUpdates": {
-            "order": 13,
+            "order": 12,
             "type": "boolean",
             "default": true,
             "description": "Check for new versions of DDEV"
+          },
+          "ddevManager.enableDebug": {
+            "order": 13,
+            "type": "boolean",
+            "default": false,
+            "description": "Enable to get additional logs and debug information."
           }
         }
       },
@@ -867,10 +891,18 @@
         "properties": {
           "ddevManager.registerPathsToExpose": {
             "order": 12,
-            "scope": "application",
-            "type": "object",
-            "additionalProperties": true,
-            "description": "Add custom paths to expose from the container. This is useful when you want to expose a binary from the container and it's not displayed in the config dropdown."
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "markdownDescription": "Add custom paths to expose from the container. This is useful when you want to expose a binary from the container and it's not displayed in the config dropdown. for example `/usr/bin/sqlite3` after exposed you will be able to call `sqlite3` in the terminal, tasks and extensions",
+            "scope": "resource",
+            "examples": [
+              [
+                "/usr/bin/apt-get",
+                "/usr/bin/sqlite3"
+              ]
+            ]
           },
           "ddevManager.exposed": {
             "order": 13,
@@ -1008,28 +1040,14 @@
       "supported": true
     }
   },
-  "scripts": {
-    "postinstall": "npx patch-package",
-    "prepare": "patch-package",
-    "vscode:prepublish": "npm run package",
-    "compile": "webpack",
-    "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "pack": "vsce package --allow-star-activation",
-    "publish": "vsce publish",
-    "test": "node ./out/test/runTest.js"
-  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@dbcode/vscode-api": "^1.1.1",
     "@types/glob": "^8.1.0",
     "@types/lodash-es": "^4.17.9",
     "@types/mocha": "^10.0.1",
     "@types/node": "20.5.0",
-    "@types/vscode": "^1.70.0",
+    "@types/vscode": "^1.102.0",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "@vscode/test-electron": "^2.1.5",
@@ -1040,6 +1058,7 @@
     "patch-package": "^8.0.0",
     "ts-loader": "^9.3.1",
     "typescript": "^5.1.6",
+    "vsce": "^2.15.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0",
@@ -1054,7 +1073,6 @@
     "node-fetch": "^3.3.2",
     "open": "^9.1.0",
     "rxjs": "^7.8.0",
-    "vsce": "^2.15.0",
     "ws": "^8.13.0",
     "yaml": "^2.2.1"
   }
