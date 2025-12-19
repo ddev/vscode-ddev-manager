@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -714,7 +714,7 @@
         },
         {
           "command": "biatiddev.reloadExposeFromContainer",
-          "when": "ddev:debugEnabled"
+          "when": "ddev:debugEnabled || ddev:devModeEnabled"
         }
       ]
     },
@@ -853,6 +853,7 @@
               "Querious",
               "Sequel Pro",
               "DBeaver",
+              "HeidiSQL",
               "phpMyAdmin",
               "Adminer",
               "VS Code Extension: DBCode",
@@ -865,7 +866,8 @@
               "Requires Sequel Ace app. Available for Mac Only",
               "Requires Querious app. Available for Mac Only",
               "Requires Sequel Pro. Available for Mac Only",
-              "Requires DBeaver Available for Windows, Mac and Linux",
+              "Requires DBeaver. Available for Windows, Mac and Linux",
+              "Requires HeidiSQL. Available for Windows and Linux",
               "Requires phpMyAdmin service. If the service is still not installed the extension will give you the option to install it",
               "Requires Adminer service. If the service is still not installed the extension will give you the option to install it",
               "Requires DBCode VS Code extension.",
@@ -1041,9 +1043,9 @@
     }
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.1.4",
     "@dbcode/vscode-api": "^1.1.1",
-    "@types/glob": "^8.1.0",
+    "@types/glob": "^9.0.0",
     "@types/lodash-es": "^4.17.12",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.5.0",
