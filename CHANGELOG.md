@@ -2,6 +2,27 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [3.2.0] - 2026-02-02
+
+- New: New setting to skip configuration in subfolder (#33)[[#33](https://github.com/ddev/vscode-ddev-manager/issues/33)]
+- Improved: Some minor code cleanup
+
+## [3.1.1] - 2025-12-22
+
+- Improved: DDEV version detection
+
+## [3.1.0] - 2025-12-18
+
+- New: Added support for HeidiSQL
+- Improved: Code cleanup and refactoring
+- Fixed: Wrong DDEV version displayed in the updater
+
+## [3.0.2] - 2025-08-05
+
+- Improved: Logging
+- Improved: Expose from container, the exposed commands were improved just a little bit
+- Updated: Dependencies update and cleanup
+
 ## [3.0.1] - 2025-08-05
 
 - New: Added an option to enable debugging. When enabled, it provides more logs and, when using exposed commands, creates files in the active workspace containing additional information such as environment variables, commands output, and more to assist with debugging.
