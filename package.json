@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -782,26 +782,32 @@
             "default": true,
             "description": "If enabled, the extension will automatically configure the launch.json and tasks.json files so XDebug is automatically enabled/disabled when step debugging is started or stopped"
           },
-          "ddevManager.showServicesExpandedInSidebar": {
+          "ddevManager.skipConfigurationInSubfolder": {
             "order": 10,
+            "type": "boolean",
+            "default": false,
+            "description": "This setting is relevant only if you usually open subfolders of DDEV projects in VS Code. The extension can correctly detect a DDEV project whether you open the project root or any of its subfolders. However, VS Code itself does not have that context. Some VS Code features require a .vscode folder to exist in the workspace root. If you don't want to have a .vscode folder in every subfolder of your DDEV projects, you can enable this option. When enabled, any features that require a .vscode folder will be skipped when a subfolder of a DDEV project is opened instead of the full DDEV project. Features that will be disabled in subfolders: Automatic PHP version configuration, Automatic Debugger configuration, Tasks, Database configurations (database extensions that live in the editor)."
+          },
+          "ddevManager.showServicesExpandedInSidebar": {
+            "order": 11,
             "type": "boolean",
             "default": true,
             "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
           },
           "ddevManager.deleteDDEVFolder": {
-            "order": 11,
+            "order": 12,
             "type": "boolean",
             "default": false,
             "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
           },
           "ddevManager.checkForUpdates": {
-            "order": 12,
+            "order": 13,
             "type": "boolean",
             "default": true,
             "description": "Check for new versions of DDEV"
           },
           "ddevManager.enableDebug": {
-            "order": 13,
+            "order": 14,
             "type": "boolean",
             "default": false,
             "description": "Enable to get additional logs and debug information."
