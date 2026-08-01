@@ -2,7 +2,7 @@
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
   "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "publisher": "biati",
   "author": {
     "name": "Biati Digital",
@@ -54,9 +54,12 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
+    "prepack": "npm test",
     "pack": "vsce package --allow-star-activation --no-dependencies",
     "publish": "vsce publish --no-dependencies",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "pretest:e2e": "npm run compile-tests && npm run compile && npm run lint",
+    "test:e2e": "DDEV_E2E=1 node ./out/test/runTest.js"
   },
   "contributes": {
     "viewsWelcome": [
@@ -1063,7 +1066,7 @@
     "@types/vscode": "^1.102.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@vscode/test-electron": "^2.5.2",
+    "@vscode/test-electron": "^3.1.0",
     "copy-webpack-plugin": "^11.0.0",
     "enhanced-resolve": "5.18.3",
     "eslint": "^8.57.1",
