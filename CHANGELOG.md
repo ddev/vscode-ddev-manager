@@ -2,6 +2,11 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [3.4.3] - 2026-08-01
+
+- Fixed: Sidebar view did not showed the correct content as DDEV changed strings in errors
+- Improved: Tests to detect errors like the above
+
 ## [3.4.2] - 2026-07-22
 
 - Fixed: Kill processes when docker does not respond
