@@ -1,47 +1,34 @@
 {
   "name": "ddev-manager",
   "displayName": "DDEV Manager",
-  "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
   "version": "3.4.3",
-  "publisher": "biati",
-  "author": {
-    "name": "Biati Digital",
-    "url": "https://www.biati.com.mx"
-  },
-  "engines": {
-    "vscode": "^1.102.0"
-  },
+  "description": "DDEV Manager offers a centralized and user-friendly interface to control every aspect of your DDEV projects.",
   "categories": [
     "Other"
   ],
   "keywords": [
-    "ddev",
-    "development",
-    "local",
-    "docker",
     "colima",
-    "manager",
+    "ddev",
+    "deploy",
+    "development",
+    "docker",
     "explorer",
-    "deploy"
+    "local",
+    "manager"
   ],
-  "activationEvents": [
-    "workspaceContains:**/.ddev/config.yaml",
-    "onLanguage",
-    "onCommand:workbench.action.tasks.runTask"
-  ],
-  "icon": "assets/icon.png",
-  "galleryBanner": {
-    "color": "#EFF1F3",
-    "theme": "light"
+  "bugs": {
+    "url": "https://github.com/ddev/vscode-ddev-manager/issues"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Biati Digital",
+    "url": "https://www.biati.com.mx"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ddev/vscode-ddev-manager.git"
   },
-  "bugs": {
-    "url": "https://github.com/ddev/vscode-ddev-manager/issues"
-  },
-  "license": "Apache-2.0",
+  "publisher": "biati",
   "main": "./dist/extension.js",
   "scripts": {
     "postinstall": "npx patch-package",
@@ -60,6 +47,43 @@
     "test": "node ./out/test/runTest.js",
     "pretest:e2e": "npm run compile-tests && npm run compile && npm run lint",
     "test:e2e": "DDEV_E2E=1 node ./out/test/runTest.js"
+  },
+  "dependencies": {
+    "@asleepace/try": "^0.2.1",
+    "compare-versions": "^6.1.1",
+    "croner": "^7.0.8",
+    "lodash-es": "^4.17.21",
+    "node-fetch": "^3.3.2",
+    "open": "^9.1.0",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.4",
+    "@dbcode/vscode-api": "^1.1.1",
+    "@types/glob": "^9.0.0",
+    "@types/lodash-es": "^4.17.12",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.5.0",
+    "@types/vscode": "^1.102.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vscode/test-electron": "^3.1.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "enhanced-resolve": "5.18.3",
+    "eslint": "^8.57.1",
+    "fallow": "2.86.0",
+    "glob": "^10.4.5",
+    "mocha": "^10.8.2",
+    "patch-package": "^8.0.0",
+    "ts-loader": "^9.5.2",
+    "tsc-alias": "1.8.17",
+    "typescript": "^5.9.2",
+    "vsce": "^2.15.0",
+    "vscode": "npm:@types/vscode@^1.102.0",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0",
+    "webpack-shell-plugin-next": "^2.3.3"
   },
   "contributes": {
     "viewsWelcome": [
@@ -774,50 +798,56 @@
             ],
             "description": "Choose how the project name should be displayed in the sidebar"
           },
-          "ddevManager.automaticallyInstallProjectFiles": {
+          "ddevManager.automaticallyStartProject": {
             "order": 7,
+            "type": "boolean",
+            "default": false,
+            "description": "When a workspace is opened, detect whether it belongs to a DDEV project and start it automatically if it is not already running."
+          },
+          "ddevManager.automaticallyInstallProjectFiles": {
+            "order": 8,
             "type": "boolean",
             "default": false,
             "description": "When adding a new project, the extension will attempt a fully automated installation by adding the project CMS files and executing the necessary project configurations."
           },
           "ddevManager.automaticallyConfigureWorkspacePHP": {
-            "order": 8,
+            "order": 9,
             "type": "boolean",
             "default": true,
             "description": "If enabled, the extension will get the PHP version configured on your DDEV project and will configure the workspace to use the same version so you can get appropriate suggestions and diagnostics. You need to install a PHP intellisen extension in order for this to work, currently it supports the following extensions: PHP Intelephense and PHP by Devsense"
           },
           "ddevManager.automaticallyConfigureDebugger": {
-            "order": 9,
+            "order": 10,
             "type": "boolean",
             "default": true,
             "description": "If enabled, the extension will automatically configure the launch.json and tasks.json files so XDebug is automatically enabled/disabled when step debugging is started or stopped"
           },
           "ddevManager.skipConfigurationInSubfolder": {
-            "order": 10,
+            "order": 11,
             "type": "boolean",
             "default": false,
             "description": "This setting is relevant only if you usually open subfolders of DDEV projects in VS Code. The extension can correctly detect a DDEV project whether you open the project root or any of its subfolders. However, VS Code itself does not have that context. Some VS Code features require a .vscode folder to exist in the workspace root. If you don't want to have a .vscode folder in every subfolder of your DDEV projects, you can enable this option. When enabled, any features that require a .vscode folder will be skipped when a subfolder of a DDEV project is opened instead of the full DDEV project. Features that will be disabled in subfolders: Automatic PHP version configuration, Automatic Debugger configuration, Tasks, Database configurations (database extensions that live in the editor)."
           },
           "ddevManager.showServicesExpandedInSidebar": {
-            "order": 11,
+            "order": 12,
             "type": "boolean",
             "default": true,
             "description": "If enabled, when expanding a project in the sidebar, it's services will also expand."
           },
           "ddevManager.deleteDDEVFolder": {
-            "order": 12,
+            "order": 13,
             "type": "boolean",
             "default": false,
             "description": "By default, DDEV does not delete the .ddev folder upon project deletion. If this option is enabled, the .ddev folder will also be removed, while your project files remain untouched. The .ddev folder keeps the project information and database snapshots, make sure that you don't need this files and that you understand the consequences."
           },
           "ddevManager.checkForUpdates": {
-            "order": 13,
+            "order": 14,
             "type": "boolean",
             "default": true,
             "description": "Check for new versions of DDEV"
           },
           "ddevManager.enableDebug": {
-            "order": 14,
+            "order": 15,
             "type": "boolean",
             "default": false,
             "description": "Enable to get additional logs and debug information."
@@ -1050,47 +1080,23 @@
       }
     ]
   },
+  "activationEvents": [
+    "onCommand:workbench.action.tasks.runTask",
+    "onLanguage",
+    "workspaceContains:**/.ddev/config.yaml"
+  ],
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#EFF1F3",
+    "theme": "light"
+  },
+  "engines": {
+    "vscode": "^1.102.0"
+  },
   "capabilities": {
     "virtualWorkspaces": false,
     "untrustedWorkspaces": {
       "supported": true
     }
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.1.4",
-    "@dbcode/vscode-api": "^1.1.1",
-    "@types/glob": "^9.0.0",
-    "@types/lodash-es": "^4.17.12",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "20.5.0",
-    "@types/vscode": "^1.102.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "@vscode/test-electron": "^3.1.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "enhanced-resolve": "5.18.3",
-    "eslint": "^8.57.1",
-    "fallow": "2.86.0",
-    "glob": "^10.4.5",
-    "mocha": "^10.8.2",
-    "patch-package": "^8.0.0",
-    "ts-loader": "^9.5.2",
-    "tsc-alias": "1.8.17",
-    "typescript": "^5.9.2",
-    "vsce": "^2.15.0",
-    "vscode": "npm:@types/vscode@^1.102.0",
-    "webpack": "^5.101.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0",
-    "webpack-shell-plugin-next": "^2.3.3"
-  },
-  "dependencies": {
-    "@asleepace/try": "^0.2.1",
-    "compare-versions": "^6.1.1",
-    "croner": "^7.0.8",
-    "lodash-es": "^4.17.21",
-    "node-fetch": "^3.3.2",
-    "open": "^9.1.0",
-    "yaml": "^2.8.1"
   }
 }
