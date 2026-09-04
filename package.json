@@ -768,7 +768,7 @@
     },
     "configuration": [
       {
-        "title": "DDEV Manager",
+        "title": "General",
         "properties": {
           "ddevManager.ddevBinaryPath": {
             "order": 1,
