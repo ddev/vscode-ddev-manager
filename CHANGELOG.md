@@ -2,6 +2,17 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [3.5.0] - 2026-09-04
+
+- New: Option to automatically start/stop DDEV projects when the workspace is opened/closed
+- New: After upgrade ask the user if he wants to free up disk space used by previous Docker image versions
+- New: Share. Added Cloudflare support for sharing DDEV projects
+- New: Share. Theres a new option to configure default share, defaults to cloudflare as it does not require an account
+- New: Share. New command "Share with..." so does not matter the configured share provider you can start any provider you want
+- New: Share. Detect if ngrok or cloudflare are not installed and offer the user to install them using brew on macOS otherwise show install instructions
+- New: If DDEV is not found, notify the user that he can configure the path in the extension settings or automatically install DDEV on macOS for now
+- New: Added support for TablePro database manager
+- Improved: Plugin settings page now shows "General" title
 ## [3.4.3] - 2026-08-01
 
 - Fixed: Sidebar view did not showed the correct content as DDEV changed strings in errors
