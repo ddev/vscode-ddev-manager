@@ -2,6 +2,12 @@
 
 All notable changes to the "ddev-manager" extension will be documented in this file.
 
+## [3.5.1] - 2026-09-16
+
+- Improved: Share and install process on macOS
+- Fix: Fixed links in add-ons list not opening the browser
+- Fix: Handle error correctly when installing add-on and no releases are found
+
 ## [3.5.0] - 2026-09-04
 
 - New: Option to automatically start/stop DDEV projects when the workspace is opened/closed
@@ -13,6 +19,7 @@ All notable changes to the "ddev-manager" extension will be documented in this f
 - New: If DDEV is not found, notify the user that he can configure the path in the extension settings or automatically install DDEV on macOS for now
 - New: Added support for TablePro database manager
 - Improved: Plugin settings page now shows "General" title
+
 ## [3.4.3] - 2026-08-01
 
 - Fixed: Sidebar view did not showed the correct content as DDEV changed strings in errors
